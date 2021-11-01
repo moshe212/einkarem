@@ -9,7 +9,7 @@ const getBooking = async (Arrival) => {
     .format("YYYY-MM-DD")
     .replace("-", "")
     .replace("-", "");
-
+  console.log("Today", Today);
   let Bookings = [];
   for (let i = 0; i < propKeys.length; i++) {
     await axios
