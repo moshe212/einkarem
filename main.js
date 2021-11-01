@@ -3,7 +3,8 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
-app.use(bodyParser.json());
+const dotenv = require("dotenv");
+const server = http.createServer(app);
 let port = process.env.PORT;
 if (port == null || port == "") {
   port = 5000;
@@ -16,6 +17,7 @@ const schedule = require("node-schedule");
 const fs = require("fs");
 
 dotenv.config();
+app.use(bodyParser.json());
 
 const { bed24Func } = require("./bed24Func");
 let sessionData;
@@ -57,7 +59,7 @@ client.on("authenticated", (session) => {
 // });
 client.initialize();
 
-const job1 = schedule.scheduleJob("41 * * * *", bed24Func.getDeparture);
+const job1 = schedule.scheduleJob("45 * * * *", bed24Func.getDeparture);
 // const job2 = schedule.scheduleJob("59 * * * *", bed24Func.getArrival);
 
 app.get("*", (req, res) => {
