@@ -133,7 +133,7 @@ const getDeparture = async () => {
       "\nעל מנת להקל עליכם את תהליך היציאה מהחדרים, אתם מוזמנים לבצע אותו בקלות כעת באמצעות הוואטסאפ.";
     const textMessage2 = "האם השתמשת במיני בר שבחדר?" + "\n1️⃣ כן \n2️⃣ לא";
     console.log("Number", Number);
-    if (isIsraeli && !isGroup) {
+    if (isIsraeli && !isGroup && Number == "972523587990@c.us") {
       // && Number == "972523587990@c.us"
       await client.sendMessage("972523587990@c.us", textMessage1);
       await client.sendMessage("972523587990@c.us", textMessage2);
