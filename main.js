@@ -46,5 +46,5 @@ client.on("authenticated", (session) => {
 // });
 client.initialize();
 
-const job1 = schedule.scheduleJob("11 * * * *", bed24Func.getDeparture);
+const job1 = schedule.scheduleJob("22 * * * *", bed24Func.getDeparture);
 // const job2 = schedule.scheduleJob("59 * * * *", bed24Func.getArrival);
