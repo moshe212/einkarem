@@ -31,6 +31,9 @@ const getDeparture = async () => {
 
   const client = new Client({
     session: sessionData,
+    puppeteer: {
+      args: ["--no-sandbox"],
+    },
   });
 
   client.on("message", async (msg) => {

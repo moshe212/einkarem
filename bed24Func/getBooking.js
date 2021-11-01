@@ -5,7 +5,7 @@ const getBooking = async (Arrival) => {
   const apiKey = process.env.apiKey;
   const propKeys = [process.env.propKey1, process.env.propKey2];
   const Today = moment()
-    // .add(1, "days")
+    .add(2, "days")
     .format("YYYY-MM-DD")
     .replace("-", "")
     .replace("-", "");
