@@ -11,7 +11,7 @@ if (port == null || port == "") {
 }
 
 const qrcode = require("qrcode-terminal");
-const dotenv = require("dotenv");
+// const dotenv = require("dotenv");
 const { Client } = require("whatsapp-web.js");
 const schedule = require("node-schedule");
 const fs = require("fs");
