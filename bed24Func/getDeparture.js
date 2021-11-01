@@ -70,7 +70,7 @@ const getDeparture = async () => {
       stagesData.bookinglist[index].masterId !== ""
         ? true
         : false;
-
+    console.log("isIsraeli", isIsraeli, isGroup);
     if (isIsraeli && !isGroup) {
       const Answer = await getAnswer(
         msg.body,
