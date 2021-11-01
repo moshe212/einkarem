@@ -11,6 +11,9 @@ let sessionData;
 
 const client = new Client({
   qrTimeoutMs: 0,
+  puppeteer: {
+    args: ["--no-sandbox"],
+  },
 });
 
 client.on("qr", (qr) => {
