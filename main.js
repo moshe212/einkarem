@@ -1,3 +1,14 @@
+const http = require("http");
+const express = require("express");
+const app = express();
+const bodyParser = require("body-parser");
+const cors = require("cors");
+app.use(bodyParser.json());
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 5000;
+}
+
 const qrcode = require("qrcode-terminal");
 const dotenv = require("dotenv");
 const { Client } = require("whatsapp-web.js");
@@ -48,3 +59,13 @@ client.initialize();
 
 const job1 = schedule.scheduleJob("33 * * * *", bed24Func.getDeparture);
 // const job2 = schedule.scheduleJob("59 * * * *", bed24Func.getArrival);
+
+app.get("*", (req, res) => {
+  console.log(req.body);
+  res.send("non rout");
+  //   res.sendFile(path.join(__dirname + "/Client/build/index.html"));
+});
+
+server.listen(port, () => {
+  console.log("Example app listening on port " + port);
+});
