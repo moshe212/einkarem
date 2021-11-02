@@ -93,13 +93,28 @@ const getDeparture = async () => {
   });
   await client.initialize();
 
-  if (fs.existsSync("stages.json")) {
-    console.log("stages exist");
-    await updateStageFile(BookingList, false);
-  } else {
-    console.log("stages not exist");
-    await createStageFile(BookingList);
+  // if (fs.existsSync("stages.json")) {
+  //   console.log("stages exist");
+  //   fs.unlinkSync("../stages.json"),
+  //     async function (err) {
+  //       if (err) throw err;
+  //       console.log("File deleted!");
+  //       await createStageFile(BookingList);
+  //     };
+  //   // await updateStageFile(BookingList, false);
+  // } else {
+  //   console.log("stages not exist");
+  //   await createStageFile(BookingList);
+  // }
+
+  try {
+    fs.unlinkSync("stages.json");
+    //file removed
+    console.log("File deleted!");
+  } catch (err) {
+    console.error(err);
   }
+  await createStageFile(BookingList);
 
   for (let i = 0; i < BookingList.length; i++) {
     isIsraeli =
