@@ -24,10 +24,10 @@ const getPayLink = async (
   }).then(function (response) {
     console.log("Status:", response.statusCode);
     console.log("Headers:", JSON.stringify(response.headers));
-    console.log("Response:", response.data.data);
+    console.log("Response:", response.data.data.url);
     PayUrl = response.data.data.url;
-    return response.data.data.url;
   });
+  return response.data.data.url;
 };
 
 module.exports = { getPayLink };

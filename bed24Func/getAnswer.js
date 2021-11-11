@@ -24,7 +24,7 @@ const getAnswer = async (
   const userId = process.env.userId;
   const successUrl = "";
   const cancelUrl = "";
-  let CreditCardLink = "";
+  // let CreditCardLink = "";
   console.log("Place", Place);
   const BankDetails =
     Place === "115824"
@@ -81,7 +81,7 @@ const getAnswer = async (
           Answer.push(textMessage1);
           break;
         case 3:
-          CreditCardLink = await getPayLink(
+          const CreditCardLink1 = await getPayLink(
             pageCode,
             userId,
             Price,
@@ -93,10 +93,10 @@ const getAnswer = async (
             Place,
             FirstName + " Last"
           );
-          console.log("CreditCardLink", CreditCardLink);
+          console.log("CreditCardLink1", CreditCardLink1);
           textMessage1 =
             "תודה רבה. להלן לינק לדף תשלום מאובטח לצורך ביצוע התשלום בכרטיס אשראי.";
-          textMessage2 = CreditCardLink;
+          textMessage2 = CreditCardLink1;
           Answer.push(textMessage1, textMessage2);
           break;
         case 4:
@@ -151,7 +151,7 @@ const getAnswer = async (
           Answer.push(textMessage1);
           break;
         case 3:
-          CreditCardLink = await getPayLink(
+          const CreditCardLink2 = await getPayLink(
             pageCode,
             userId,
             Price,
@@ -163,10 +163,10 @@ const getAnswer = async (
             Place,
             FirstName + " Last"
           );
-          console.log("CreditCardLink", CreditCardLink);
+          console.log("CreditCardLink2", CreditCardLink2);
           textMessage1 =
             "תודה רבה. להלן לינק לדף תשלום מאובטח לצורך ביצוע התשלום בכרטיס אשראי.";
-          textMessage2 = "Link";
+          textMessage2 = CreditCardLink2;
           Answer.push(textMessage1, textMessage2);
           break;
         case 4:
