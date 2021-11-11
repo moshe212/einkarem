@@ -22,7 +22,7 @@ const getPayLink = async (
     console.log("Response:", response.data.url);
     Url = response.data.url;
   });
+  return Url;
 };
-return Url;
 
 module.exports = { getPayLink };
