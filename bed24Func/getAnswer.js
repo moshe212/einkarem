@@ -47,8 +47,10 @@ const getAnswer = async (
         await updateStageFile(BookingList, true, StageForUpdate, Phone);
         break;
       } else if (ReciveMsg == 2) {
-        textMessage1 = "תודה רבה. הסכום לתשלום כולל מעמ הוא: " + "*";
-        Price +
+        textMessage1 =
+          "תודה רבה. הסכום לתשלום כולל מעמ הוא: " +
+          "*" +
+          Price +
           "*" +
           "\nאנחנו אף פעם לא גובים תשלום מראש. כרטיס האשראי שניתן בעת ביצוע ההזמנה ניתן לביטחון בלבד";
         textMessage2 =
