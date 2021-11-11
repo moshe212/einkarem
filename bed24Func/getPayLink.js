@@ -12,18 +12,20 @@ const getPayLink = async (
   place,
   fullName
 ) => {
-  let Url = "";
+  let PayUrl = "";
+  const url = `https://sandbox.meshulam.co.il/api/light/server/1.0/createPaymentProcess/?pageCode=${pageCode}&userId=${userId}&apiKey=&sum=${sum}&successUrl=${successUrl}&cancelUrl=${cancelUrl}&description=${description}&paymentNum=&maxPaymentNum=1&pageField[fullName]=${fullName}&pageField[phone]=${phone}&cField1=${bookId}&cField2=${place}`;
+  console.log("url", url);
   await axios({
     method: "post",
-    url: `https://sandbox.meshulam.co.il/api/light/server/1.0/createPaymentProcess/?pageCode=${pageCode}&userId=${userId}&apiKey=&sum=${sum}&successUrl=${successUrl}&cancelUrl=${cancelUrl}&description=${description}&paymentNum=&maxPaymentNum=1&pageField[fullName]=${fullName}&pageField[phone]=${phone}&cField1=${bookId}&cField2=${place}`,
+    url: url,
     headers: {
       "Content-Type": "application/json",
     },
   }).then(function (response) {
     console.log("Status:", response.statusCode);
     console.log("Headers:", JSON.stringify(response.headers));
-    console.log("Response:", response.data.url);
-    Url = response.data.url;
+    console.log("Response:", response.data);
+    PayUrl = response.data.url;
   });
   return Url;
 };
