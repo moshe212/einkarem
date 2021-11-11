@@ -19,6 +19,7 @@ const getAnswer = async (
   let Answer = [];
   let StageForUpdate = 0;
   let Payment = 0;
+  const tel = "0" + Phone.substring(3, 12);
   const pageCode = process.env.pageCode;
   const userId = process.env.userId;
   const successUrl = "";
@@ -87,7 +88,7 @@ const getAnswer = async (
             successUrl,
             cancelUrl,
             "",
-            Phone,
+            tel,
             BookId,
             Place,
             FirstName
@@ -157,7 +158,7 @@ const getAnswer = async (
             successUrl,
             cancelUrl,
             "",
-            Phone,
+            tel,
             BookId,
             Place,
             FirstName
