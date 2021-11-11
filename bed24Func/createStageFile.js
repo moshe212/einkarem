@@ -33,6 +33,7 @@ const createStageFile = async (BookingList) => {
       group: BookingList[b].group,
       masterId: BookingList[b].masterId,
       bookId: BookingList[b].bookId,
+      guestFirstName: BookingList[b].guestFirstName,
     }); //add some data
   }
 

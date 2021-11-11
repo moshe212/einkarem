@@ -48,6 +48,7 @@ const updateStageFile = async (
         group: BookingList[b].group,
         masterId: BookingList[b].masterId,
         bookId: BookingList[b].bookId,
+        guestFirstName: BookingList[b].guestFirstName,
       }); //add some data
     } else if (isAnswer) {
       const index = stagesData.bookinglist.findIndex(

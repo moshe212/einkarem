@@ -10,7 +10,8 @@ const getAnswer = async (
   Price,
   BookingList,
   Place,
-  BookId
+  BookId,
+  FirstName
 ) => {
   let textMessage1 = "";
   let textMessage2 = "";
@@ -88,7 +89,8 @@ const getAnswer = async (
             "",
             Phone,
             BookId,
-            Place
+            Place,
+            FirstName
           );
           console.log("CreditCardLink", CreditCardLink);
           textMessage1 =
@@ -157,7 +159,8 @@ const getAnswer = async (
             "",
             Phone,
             BookId,
-            Place
+            Place,
+            FirstName
           );
           console.log("CreditCardLink", CreditCardLink);
           textMessage1 =

@@ -7,8 +7,10 @@ const getPayLink = async (
   successUrl,
   cancelUrl,
   description,
+  phone,
   bookId,
-  place
+  place,
+  fullName
 ) => {
   let Url = "";
   await axios({

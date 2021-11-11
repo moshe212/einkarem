@@ -56,6 +56,7 @@ const getDeparture = async () => {
     const Price = parseFloat(stagesData.bookinglist[index].price);
     const PriceMAAM = isBookingSite ? Price * 1.17 : Price;
     const Place = stagesData.bookinglist[index].propId;
+    const FirstName = stagesData.bookinglist[index].guestFirstName;
     // console.log("Place1", Place);
     isIsraeli =
       stagesData.bookinglist[index].lang === "HE" ||
@@ -80,7 +81,8 @@ const getDeparture = async () => {
         PriceMAAM,
         BookingList,
         Place,
-        BookId
+        BookId,
+        FirstName
       );
       for (let i = 0; i < Answer.length; i++) {
         await client.sendMessage(msg.from, Answer[i]);
