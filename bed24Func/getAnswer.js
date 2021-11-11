@@ -18,6 +18,10 @@ const getAnswer = async (
   let Answer = [];
   let StageForUpdate = 0;
   let Payment = 0;
+  const pageCode = process.env.pageCode;
+  const userId = process.env.userId;
+  const successUrl = "";
+  const cancelUrl = "";
   let CreditCardLink = "";
   console.log("Place", Place);
   const BankDetails =
@@ -73,23 +77,15 @@ const getAnswer = async (
           Answer.push(textMessage1);
           break;
         case 3:
-          const pageCode = process.env.pageCodeuserId;
-          const userId = process.env.userId;
-          const sum = Price;
-          const successUrl = "";
-          const cancelUrl = "";
-          const description = "";
-          const phone = Phone;
-          const bookId = BookId;
           CreditCardLink = await getPayLink(
             pageCode,
             userId,
-            sum,
+            Price,
             successUrl,
             cancelUrl,
-            description,
-            phone,
-            bookId
+            "",
+            Phone,
+            BookId
           );
           console.log("CreditCardLink", CreditCardLink);
           textMessage1 =
@@ -133,7 +129,7 @@ const getAnswer = async (
         "\n1️⃣ תשלום במזומן \n2️⃣ תשלום בהעברה בנקאית \n3️⃣ תשלום בכרטיס אשראי \n4️⃣ תשלום באפליקציית PAYBOX \n5️⃣ תשלום באפליקציית PAY";
       Answer.push(textMessage1, textMessage2);
       StageForUpdate = 3;
-      await updateStageFile(BookingList, true, StageForUpdate, Phone);
+      await updateStageFile(BookingList, true, StageForUpdate, Phone, Payment);
       break;
     case 3:
       switch (parseInt(ReciveMsg)) {
@@ -149,6 +145,17 @@ const getAnswer = async (
           Answer.push(textMessage1);
           break;
         case 3:
+          CreditCardLink = await getPayLink(
+            pageCode,
+            userId,
+            Price,
+            successUrl,
+            cancelUrl,
+            "",
+            Phone,
+            BookId
+          );
+          console.log("CreditCardLink", CreditCardLink);
           textMessage1 =
             "תודה רבה. להלן לינק לדף תשלום מאובטח לצורך ביצוע התשלום בכרטיס אשראי.";
           textMessage2 = "Link";

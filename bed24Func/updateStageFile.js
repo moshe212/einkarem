@@ -6,7 +6,13 @@ const PNF = require("google-libphonenumber").PhoneNumberFormat;
 const phoneUtil =
   require("google-libphonenumber").PhoneNumberUtil.getInstance();
 
-const updateStageFile = async (BookingList, isAnswer, Stage, PhoneSend) => {
+const updateStageFile = async (
+  BookingList,
+  isAnswer,
+  Stage,
+  PhoneSend,
+  Payment
+) => {
   let stagesData = { bookinglist: [] };
   const STAGES_FILE_PATH = "../stages.json";
 
@@ -48,6 +54,9 @@ const updateStageFile = async (BookingList, isAnswer, Stage, PhoneSend) => {
         (x) => x.phone === PhoneSend
       );
       stagesData.bookinglist[index].stage = parseInt(Stage);
+      if (Payment != "") {
+        stagesData.bookinglist[index].price = parseInt(Payment);
+      }
     }
   }
   fs.writeFile("stages.json", JSON.stringify(stagesData), "utf8", (err) => {
