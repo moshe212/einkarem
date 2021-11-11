@@ -1,6 +1,7 @@
 const fs = require("fs");
 const { updateStageFile } = require("./updateStageFile");
 const { getDrinkPriceTotal } = require("./getDrinkPriceTotal");
+const { getPayLink } = require("./getPayLink");
 
 const getAnswer = async (
   ReciveMsg,
@@ -8,7 +9,8 @@ const getAnswer = async (
   Stage,
   Price,
   BookingList,
-  Place
+  Place,
+  BookId
 ) => {
   let textMessage1 = "";
   let textMessage2 = "";
@@ -16,6 +18,7 @@ const getAnswer = async (
   let Answer = [];
   let StageForUpdate = 0;
   let Payment = 0;
+  let CreditCardLink = "";
   console.log("Place", Place);
   const BankDetails =
     Place === "115824"
@@ -70,9 +73,28 @@ const getAnswer = async (
           Answer.push(textMessage1);
           break;
         case 3:
+          const pageCode = process.env.pageCodeuserId;
+          const userId = process.env.userId;
+          const sum = Price;
+          const successUrl = "";
+          const cancelUrl = "";
+          const description = "";
+          const phone = Phone;
+          const bookId = BookId;
+          CreditCardLink = await getPayLink(
+            pageCode,
+            userId,
+            sum,
+            successUrl,
+            cancelUrl,
+            description,
+            phone,
+            bookId
+          );
+          console.log("CreditCardLink", CreditCardLink);
           textMessage1 =
             "תודה רבה. להלן לינק לדף תשלום מאובטח לצורך ביצוע התשלום בכרטיס אשראי.";
-          textMessage2 = "Link";
+          textMessage2 = CreditCardLink;
           Answer.push(textMessage1, textMessage2);
           break;
         case 4:
@@ -118,7 +140,7 @@ const getAnswer = async (
         case 1:
           textMessage1 =
             "תודה רבה. נא צרו קשר עם הצוות להסדרת התשלום." +
-            "\nנשמח לארת אתכם שוב, להתראות בעין כרם.";
+            "\nנשמח לארח אתכם שוב, להתראות בעין כרם.";
           Answer.push(textMessage1);
           break;
         case 2:

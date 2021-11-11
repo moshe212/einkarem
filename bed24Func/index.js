@@ -5,6 +5,7 @@ const { createStageFile } = require("./createStageFile");
 const { updateStageFile } = require("./updateStageFile");
 const { getAnswer } = require("./getAnswer");
 const { getDrinkPriceTotal } = require("./getDrinkPriceTotal");
+const { getPayLink } = require("./getPayLink");
 
 const bed24Func = {
   getBooking,
@@ -14,6 +15,7 @@ const bed24Func = {
   updateStageFile,
   getAnswer,
   getDrinkPriceTotal,
+  getPayLink,
 };
 
 module.exports = { bed24Func };

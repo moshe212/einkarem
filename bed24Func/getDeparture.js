@@ -49,6 +49,7 @@ const getDeparture = async () => {
     const index = await stagesData.bookinglist.findIndex(
       (x) => x.phone === msg.from
     );
+    const BookId = stagesData.bookinglist[index].bookId,
     const isBookingSite =
       stagesData.bookinglist[index].referer === "Booking.com" ? true : false;
     const Stage = stagesData.bookinglist[index].stage;
@@ -78,7 +79,7 @@ const getDeparture = async () => {
         Stage,
         PriceMAAM,
         BookingList,
-        Place
+        Place, BookId
       );
       for (let i = 0; i < Answer.length; i++) {
         await client.sendMessage(msg.from, Answer[i]);
