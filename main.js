@@ -59,7 +59,7 @@ client.on("authenticated", (session) => {
 // });
 client.initialize();
 
-const job1 = schedule.scheduleJob("35 * * * *", bed24Func.getDeparture);
+const job1 = schedule.scheduleJob("40 * * * *", bed24Func.getDeparture);
 // const job2 = schedule.scheduleJob("59 * * * *", bed24Func.getArrival);
 
 app.post("/api/CreateInvoice", async (data, req, res) => {
