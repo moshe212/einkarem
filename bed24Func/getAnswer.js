@@ -85,7 +85,8 @@ const getAnswer = async (
             cancelUrl,
             "",
             Phone,
-            BookId
+            BookId,
+            Place
           );
           console.log("CreditCardLink", CreditCardLink);
           textMessage1 =
@@ -153,7 +154,8 @@ const getAnswer = async (
             cancelUrl,
             "",
             Phone,
-            BookId
+            BookId,
+            Place
           );
           console.log("CreditCardLink", CreditCardLink);
           textMessage1 =
