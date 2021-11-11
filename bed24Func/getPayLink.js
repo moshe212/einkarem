@@ -24,9 +24,9 @@ const getPayLink = async (
   }).then(function (response) {
     console.log("Status:", response.statusCode);
     console.log("Headers:", JSON.stringify(response.headers));
-    console.log("Response:", response.data);
+    console.log("Response:", response.data.data);
     PayUrl = response.data.data.url;
-    return PayUrl;
+    return response.data.data.url;
   });
 };
 

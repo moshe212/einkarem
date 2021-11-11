@@ -59,10 +59,10 @@ client.on("authenticated", (session) => {
 // });
 client.initialize();
 
-const job1 = schedule.scheduleJob("00 * * * *", bed24Func.getDeparture);
+const job1 = schedule.scheduleJob("11 * * * *", bed24Func.getDeparture);
 // const job2 = schedule.scheduleJob("59 * * * *", bed24Func.getArrival);
 
-app.post("/api/CreateInvoice", async (data, req, res) => {
+app.post("/api/CreateInvoice", async (req, res) => {
   console.log(req);
   console.log("data", data);
   // const apiKey = process.env.apiKey;
