@@ -55,7 +55,8 @@ const updateStageFile = async (
         (x) => x.phone === PhoneSend
       );
       stagesData.bookinglist[index].stage = parseInt(Stage);
-      if (Payment != "") {
+      console.log("Payment", Payment);
+      if (Payment) {
         stagesData.bookinglist[index].price = parseInt(Payment);
       }
     }
