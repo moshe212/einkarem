@@ -21,7 +21,7 @@ const fs = require("fs");
 
 dotenv.config();
 // app.use(bodyParser.json());
-app.use(express.json());
+app.use(express.json({ limit: "1mb" }));
 app.use(upload.array());
 app.use(express.static("public"));
 
