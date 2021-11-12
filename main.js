@@ -64,7 +64,7 @@ const job1 = schedule.scheduleJob("49 * * * *", bed24Func.getDeparture);
 
 app.post("/api/CreateInvoice", async (req, res) => {
   console.log(req);
-  console.log("data", data);
+  console.log("data", req.body);
   // const apiKey = process.env.apiKey;
   // const propKeys = [process.env.propKey1, process.env.propKey2];
   // const Today = moment()
