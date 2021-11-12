@@ -20,7 +20,7 @@ const schedule = require("node-schedule");
 const fs = require("fs");
 
 dotenv.config();
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
 app.use(express.json());
 // app.use(upload.array());
 app.use(express.static("public"));
