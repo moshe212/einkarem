@@ -17,7 +17,8 @@ const schedule = require("node-schedule");
 const fs = require("fs");
 
 dotenv.config();
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
+app.use(express.json());
 
 const { bed24Func } = require("./bed24Func");
 let sessionData;
