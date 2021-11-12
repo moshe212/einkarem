@@ -5,6 +5,9 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const server = http.createServer(app);
+const multer = require("multer");
+const upload = multer();
+
 let port = process.env.PORT;
 if (port == null || port == "") {
   port = 5000;
@@ -17,8 +20,10 @@ const schedule = require("node-schedule");
 const fs = require("fs");
 
 dotenv.config();
-// app.use(bodyParser.json());
+app.use(bodyParser.json());
 app.use(express.json());
+// app.use(upload.array());
+app.use(express.static("public"));
 
 const { bed24Func } = require("./bed24Func");
 let sessionData;
