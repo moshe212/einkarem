@@ -24,6 +24,7 @@ dotenv.config();
 app.use(express.json({ limit: "1mb" }));
 app.use(upload.array());
 app.use(express.static("public"));
+app.use(express.urlencoded());
 
 const { bed24Func } = require("./bed24Func");
 let sessionData;
