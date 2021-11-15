@@ -50,7 +50,7 @@ const getDeparture = async () => {
       (x) => x.phone === msg.from
     );
     console.log("idx", index);
-    if (index) {
+    if (index >= 0) {
       const BookId = stagesData.bookinglist[index].bookId;
       const isBookingSite =
         stagesData.bookinglist[index].referer === "Booking.com" ? true : false;
