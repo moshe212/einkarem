@@ -159,8 +159,8 @@ const getDeparture = async () => {
     console.log("Number", Number);
     if (isIsraeli && !isGroup && Number == "972504593125@c.us") {
       // && Number == "972523587990@c.us"
-      await client.sendMessage("972523587990@c.us", textMessage1);
-      await client.sendMessage("972523587990@c.us", textMessage2);
+      await client.sendMessage("972504593125@c.us", textMessage1);
+      await client.sendMessage("972504593125@c.us", textMessage2);
     }
   }
 };
