@@ -49,44 +49,49 @@ const getDeparture = async () => {
     const index = await stagesData.bookinglist.findIndex(
       (x) => x.phone === msg.from
     );
-    const BookId = stagesData.bookinglist[index].bookId;
-    const isBookingSite =
-      stagesData.bookinglist[index].referer === "Booking.com" ? true : false;
-    const Stage = stagesData.bookinglist[index].stage;
-    const Price = parseFloat(stagesData.bookinglist[index].price);
-    const PriceMAAM = isBookingSite ? Price * 1.17 : Price;
-    const Place = stagesData.bookinglist[index].propId;
-    const FirstName = stagesData.bookinglist[index].guestFirstName;
-    // console.log("Place1", Place);
-    isIsraeli =
-      stagesData.bookinglist[index].lang === "HE" ||
-      stagesData.bookinglist[index].lang === "he" ||
-      stagesData.bookinglist[index].guestCountry === "il" ||
-      stagesData.bookinglist[index].guestCountry === "IL" ||
-      stagesData.bookinglist[index].guestCountry2 === "IL" ||
-      stagesData.bookinglist[index].guestCountry2 === "il"
-        ? true
-        : false;
-    isGroup =
-      stagesData.bookinglist[index].group !== undefined ||
-      stagesData.bookinglist[index].masterId !== ""
-        ? true
-        : false;
-    console.log("isIsraeli", isIsraeli, isGroup);
-    if (isIsraeli && !isGroup) {
-      const Answer = await getAnswer(
-        msg.body,
-        msg.from,
-        Stage,
-        PriceMAAM,
-        BookingList,
-        Place,
-        BookId,
-        FirstName
-      );
-      for (let i = 0; i < Answer.length; i++) {
-        await client.sendMessage(msg.from, Answer[i]);
+    console.log("idx", index);
+    if (index) {
+      const BookId = stagesData.bookinglist[index].bookId;
+      const isBookingSite =
+        stagesData.bookinglist[index].referer === "Booking.com" ? true : false;
+      const Stage = stagesData.bookinglist[index].stage;
+      const Price = parseFloat(stagesData.bookinglist[index].price);
+      const PriceMAAM = isBookingSite ? Price * 1.17 : Price;
+      const Place = stagesData.bookinglist[index].propId;
+      const FirstName = stagesData.bookinglist[index].guestFirstName;
+      // console.log("Place1", Place);
+      isIsraeli =
+        stagesData.bookinglist[index].lang === "HE" ||
+        stagesData.bookinglist[index].lang === "he" ||
+        stagesData.bookinglist[index].guestCountry === "il" ||
+        stagesData.bookinglist[index].guestCountry === "IL" ||
+        stagesData.bookinglist[index].guestCountry2 === "IL" ||
+        stagesData.bookinglist[index].guestCountry2 === "il"
+          ? true
+          : false;
+      isGroup =
+        stagesData.bookinglist[index].group !== undefined ||
+        stagesData.bookinglist[index].masterId !== ""
+          ? true
+          : false;
+      console.log("isIsraeli", isIsraeli, isGroup);
+      if (isIsraeli && !isGroup) {
+        const Answer = await getAnswer(
+          msg.body,
+          msg.from,
+          Stage,
+          PriceMAAM,
+          BookingList,
+          Place,
+          BookId,
+          FirstName
+        );
+        for (let i = 0; i < Answer.length; i++) {
+          await client.sendMessage(msg.from, Answer[i]);
+        }
       }
+    } else {
+      console.log("msg from not in stages file");
     }
 
     // await updateStageFile(BookingList, true, Stage, msg.from);
@@ -152,10 +157,10 @@ const getDeparture = async () => {
       "\nעל מנת להקל עליכם את תהליך היציאה מהחדרים, אתם מוזמנים לבצע אותו בקלות כעת באמצעות הוואטסאפ.";
     const textMessage2 = "האם השתמשת במיני בר שבחדר?" + "\n1️⃣ כן \n2️⃣ לא";
     console.log("Number", Number);
-    if (isIsraeli && !isGroup && Number == "972523587990@c.us") {
+    if (isIsraeli && !isGroup && Number == "972526329878@c.us") {
       // && Number == "972523587990@c.us"
-      await client.sendMessage("972523587990@c.us", textMessage1);
-      await client.sendMessage("972523587990@c.us", textMessage2);
+      await client.sendMessage("972526329878@c.us", textMessage1);
+      await client.sendMessage("972526329878@c.us", textMessage2);
     }
   }
 };

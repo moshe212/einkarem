@@ -66,47 +66,50 @@ client.on("authenticated", (session) => {
 // });
 client.initialize();
 
-const job1 = schedule.scheduleJob("49 * * * *", bed24Func.getDeparture);
+const job1 = schedule.scheduleJob("07 * * * *", bed24Func.getDeparture);
 // const job2 = schedule.scheduleJob("59 * * * *", bed24Func.getArrival);
 
 app.post("/api/CreateInvoice", async (req, res) => {
-  console.log(req);
   console.log("data", req.body);
   // console.log("form", Formdata.entities);
-  // const apiKey = process.env.apiKey;
-  // const propKeys = [process.env.propKey1, process.env.propKey2];
-  // const Today = moment()
-  //   // .add(1, "days")
-  //   .format("YYYY-MM-DD")
-  //   .replace("-", "")
-  //   .replace("-", "");
+  const apiKey = process.env.apiKey;
+  const propKeys = [process.env.propKey1, process.env.propKey2];
+  const bookid = req.body.data.customFields.cField1;
+  const propid = req.body.data.customFields.cField2;
+  const propkey =
+    propid === "123250" ? propKeys[0] : propid === "115824" ? propKeys[1] : "";
 
-  // await axios
-  //   .get("https://api.beds24.com/json/setBooking", {
-  //     data: {
-  //       authentication: {
-  //         apiKey: apiKey,
-  //         propKey: propKeys[i],
-  //       },
-  //       bookId: "12345678",
-  //       invoice: [
-  //         {
-  //           description: "שולם בכרטיס אשראי באמצעות הבוט",
-  //           qty: "-1",
-  //           price: "23.45",
-  //           vatRate: "17",
-  //           type: "200",
-  //         },
-  //       ],
-
-  //     },
-  //   })
-  //   .then(function (res) {
-  //     // console.log("res", res.data);
-  //   })
-  //   .catch(function (error) {
-  //     console.log(error);
-  //   });
+  const Today = moment()
+    // .add(1, "days")
+    .format("YYYY-MM-DD")
+    .replace("-", "")
+    .replace("-", "");
+  console.log("propid", propid, bookid);
+  await axios
+    .get("https://api.beds24.com/json/setBooking", {
+      data: {
+        authentication: {
+          apiKey: apiKey,
+          propKey: propkey,
+        },
+        bookId: bookid,
+        invoice: [
+          {
+            description: "שולם בכרטיס אשראי באמצעות הבוט",
+            qty: "-1",
+            price: req.body.data.sum,
+            vatRate: "17",
+            type: "200",
+          },
+        ],
+      },
+    })
+    .then(function (res) {
+      console.log("resCreateInvoice", res.data);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
 
   res.send("non rout");
   //   res.sendFile(path.join(__dirname + "/Client/build/index.html"));
