@@ -67,7 +67,7 @@ client.on("authenticated", (session) => {
 // });
 client.initialize();
 
-const job1 = schedule.scheduleJob("43 * * * *", bed24Func.getDeparture);
+const job1 = schedule.scheduleJob("40 * * * *", bed24Func.getDeparture);
 // const job2 = schedule.scheduleJob("59 * * * *", bed24Func.getArrival);
 
 app.post("/api/CreateInvoice", async (req, res) => {
@@ -93,7 +93,7 @@ app.post("/api/CreateInvoice", async (req, res) => {
           {
             description: "שולם בכרטיס אשראי באמצעות הבוט",
             qty: "-1",
-            price: JSON.parse(req.body).data.data.sum,
+            price: req.body.data.sum,
             vatRate: "17",
             type: "200",
           },
