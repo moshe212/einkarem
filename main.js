@@ -66,24 +66,19 @@ client.on("authenticated", (session) => {
 // });
 client.initialize();
 
-const job1 = schedule.scheduleJob("17 * * * *", bed24Func.getDeparture);
+const job1 = schedule.scheduleJob("43 * * * *", bed24Func.getDeparture);
 // const job2 = schedule.scheduleJob("59 * * * *", bed24Func.getArrival);
 
 app.post("/api/CreateInvoice", async (req, res) => {
   console.log("data", req.body);
-  // console.log("form", Formdata.entities);
+
   const apiKey = process.env.apiKey;
   const propKeys = [process.env.propKey1, process.env.propKey2];
-  const bookid = req.body.data.customFields.cField1;
-  const propid = req.body.data.customFields.cField2;
+  const bookid = req.body.data.data.customFields.cField1;
+  const propid = req.body.data.data.customFields.cField2;
   const propkey =
     propid === "123250" ? propKeys[0] : propid === "115824" ? propKeys[1] : "";
 
-  const Today = moment()
-    // .add(1, "days")
-    .format("YYYY-MM-DD")
-    .replace("-", "")
-    .replace("-", "");
   console.log("propid", propid, bookid);
   await axios
     .get("https://api.beds24.com/json/setBooking", {
@@ -97,7 +92,7 @@ app.post("/api/CreateInvoice", async (req, res) => {
           {
             description: "שולם בכרטיס אשראי באמצעות הבוט",
             qty: "-1",
-            price: req.body.data.sum,
+            price: req.body.data.data.sum,
             vatRate: "17",
             type: "200",
           },
