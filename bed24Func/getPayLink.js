@@ -33,6 +33,7 @@ const getPayLink = async (
       console.log("Response:", body);
       console.log("Response:", body.data.data.url);
       PayUrl = body.data.data.url;
+      return PayUrl;
     }
   );
   //   await axios({
@@ -47,7 +48,7 @@ const getPayLink = async (
   //     console.log("Response:", response.data.data.url);
   //     PayUrl = response.data.data.url;
   //   });
-  return PayUrl;
+  //   return PayUrl;
 };
 
 module.exports = { getPayLink };
