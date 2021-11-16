@@ -70,7 +70,7 @@ const job1 = schedule.scheduleJob("23 * * * *", bed24Func.getDeparture);
 // const job2 = schedule.scheduleJob("59 * * * *", bed24Func.getArrival);
 
 app.post("/api/CreateInvoice", async (req, res) => {
-  console.log("data", JSON.parse(req.body).data);
+  console.log("data", JSON.parse(req.body));
 
   const apiKey = process.env.apiKey;
   const propKeys = [process.env.propKey1, process.env.propKey2];
