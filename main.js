@@ -70,12 +70,12 @@ const job1 = schedule.scheduleJob("23 * * * *", bed24Func.getDeparture);
 // const job2 = schedule.scheduleJob("59 * * * *", bed24Func.getArrival);
 
 app.post("/api/CreateInvoice", async (req, res) => {
-  console.log("data", JSON.parse(req.body));
+  console.log("data", req.body);
 
   const apiKey = process.env.apiKey;
   const propKeys = [process.env.propKey1, process.env.propKey2];
-  const bookid = JSON.parse(req.body).data.data.customFields.cField1;
-  const propid = JSON.parse(req.body).data.data.customFields.cField2;
+  const bookid = req.body.data.customFields.cField1;
+  const propid = req.body.data.customFields.cField2;
   const propkey =
     propid === "123250" ? propKeys[0] : propid === "115824" ? propKeys[1] : "";
 
