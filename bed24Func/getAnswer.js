@@ -124,19 +124,39 @@ const getAnswer = async (
     case 2:
       const DrinkPriceTotal = await getDrinkPriceTotal(ReciveMsg);
       Payment = parseFloat(Price) + parseFloat(DrinkPriceTotal);
-      textMessage1 =
-        "תודה רבה. הסכום לתשלום כולל מעמ הוא: " +
-        "*" +
-        Payment +
-        "*" +
-        "\nאנחנו אף פעם לא גובים תשלום מראש. כרטיס האשראי שניתן בעת ביצוע ההזמנה ניתן לביטחון בלבד.";
-      textMessage2 =
-        "כיצד תרצו להסדיר את התשלום:" +
-        "\n1️⃣ תשלום במזומן \n2️⃣ תשלום בהעברה בנקאית \n3️⃣ תשלום בכרטיס אשראי \n4️⃣ תשלום באפליקציית PAYBOX \n5️⃣ תשלום באפליקציית PAY";
-      Answer.push(textMessage1, textMessage2);
-      StageForUpdate = 3;
-      await updateStageFile(BookingList, true, StageForUpdate, Phone, Payment);
-      break;
+      console.log("regex", ReciveMsg);
+      const Regex1 = /^משקה [1-3] כמות [0-9]$/;
+      const Regex2 = /^משקה [1-3] כמות [0-9],משקה [1-3] כמות [0-9]$/;
+      if (
+        Regex1.test(ReciveMsg) ||
+        Regex2.test(ReciveMsg) ||
+        [1, 2, 3].includes(parseInt(ReciveMsg))
+      ) {
+        textMessage1 =
+          "תודה רבה. הסכום לתשלום כולל מעמ הוא: " +
+          "*" +
+          Payment +
+          "*" +
+          "\nאנחנו אף פעם לא גובים תשלום מראש. כרטיס האשראי שניתן בעת ביצוע ההזמנה ניתן לביטחון בלבד.";
+        textMessage2 =
+          "כיצד תרצו להסדיר את התשלום:" +
+          "\n1️⃣ תשלום במזומן \n2️⃣ תשלום בהעברה בנקאית \n3️⃣ תשלום בכרטיס אשראי \n4️⃣ תשלום באפליקציית PAYBOX \n5️⃣ תשלום באפליקציית PAY";
+        Answer.push(textMessage1, textMessage2);
+        StageForUpdate = 3;
+        await updateStageFile(
+          BookingList,
+          true,
+          StageForUpdate,
+          Phone,
+          Payment
+        );
+        break;
+      } else {
+        textMessage1 = "נא בחר באחת מהאפשרויות המוצגות בשאלה.";
+        Answer.push(textMessage1);
+        break;
+      }
+
     case 3:
       switch (parseInt(ReciveMsg)) {
         case 1:
