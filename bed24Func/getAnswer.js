@@ -181,7 +181,7 @@ const getAnswer = async (
             tel,
             BookId,
             Place,
-            FirstName + " Last"
+            FirstName + "Last"
           );
           console.log("CreditCardLink2", CreditCardLink2);
           textMessage1 =
