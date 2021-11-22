@@ -14,6 +14,7 @@ if (port == null || port == "") {
   port = 5000;
 }
 
+const moment = require("moment");
 const qrcode = require("qrcode-terminal");
 // const dotenv = require("dotenv");
 const { Client } = require("whatsapp-web.js");
@@ -28,6 +29,7 @@ app.use(express.static("public"));
 app.use(express.urlencoded());
 
 const { bed24Func } = require("./bed24Func");
+
 let sessionData;
 
 const client = new Client({
@@ -67,7 +69,19 @@ client.on("authenticated", (session) => {
 // });
 client.initialize();
 
-const job1 = schedule.scheduleJob("57 * * * *", bed24Func.getDeparture);
+const Day = moment().format("dddd");
+const job1 = schedule.scheduleJob("05 * * * 0-5", function (Day) {
+  console.log("Day1", Day);
+  if (Day != "Saturday") {
+    bed24Func.getDeparture;
+  }
+});
+const job2 = schedule.scheduleJob("05 * * * 6", function (Day) {
+  console.log("Day2", Day);
+  if (Day === "Saturday") {
+    bed24Func.getDeparture;
+  }
+});
 // const job2 = schedule.scheduleJob("59 * * * *", bed24Func.getArrival);
 
 app.post("/api/CreateInvoice", async (req, res) => {
@@ -89,6 +103,7 @@ app.post("/api/CreateInvoice", async (req, res) => {
           propKey: propkey,
         },
         bookId: bookid,
+        assignInvoiceNumber: true,
         invoice: [
           {
             description: "שולם בכרטיס אשראי באמצעות הבוט",

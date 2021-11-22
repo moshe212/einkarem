@@ -24,6 +24,12 @@ const getAnswer = async (
   const userId = process.env.userId;
   const successUrl = "";
   const cancelUrl = "";
+  const PAYBOX_Link =
+    Place === "115824"
+      ? "https://payboxapp.page.link/L95Gy2Ti7uUsD7uw6"
+      : Place === "123250"
+      ? "https://payboxapp.page.link/BWy944VEMYgp6LWG9"
+      : "";
   // let CreditCardLink = "";
   console.log("Place", Place);
   const BankDetails =
@@ -91,7 +97,7 @@ const getAnswer = async (
             tel,
             BookId,
             Place,
-            FirstName + " Last"
+            FirstName + "Last"
           );
           console.log("CreditCardLink1", CreditCardLink1);
           textMessage1 =
@@ -102,7 +108,7 @@ const getAnswer = async (
         case 4:
           textMessage1 =
             "תודה רבה. להלן קישור לביצוע התשלום באמצעות אפליקציית PAYBOX";
-          textMessage2 = "LINK";
+          textMessage2 = PAYBOX_Link;
           Answer.push(textMessage1, textMessage2);
           break;
         case 5:
@@ -192,7 +198,7 @@ const getAnswer = async (
         case 4:
           textMessage1 =
             "תודה רבה. להלן קישור לביצוע התשלום באמצעות אפליקציית PAYBOX";
-          textMessage2 = "LINK";
+          textMessage2 = PAYBOX_Link;
           Answer.push(textMessage1, textMessage2);
           break;
         case 5:
