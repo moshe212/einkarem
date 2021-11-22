@@ -69,18 +69,14 @@ client.on("authenticated", (session) => {
 // });
 client.initialize();
 
-const Day = moment().format("dddd");
-const job1 = schedule.scheduleJob("05 * * * 0-5", function (Day) {
+const job1 = schedule.scheduleJob("15 * * * 0-5", function (Date) {
+  const Day = moment(Date).format("dddd");
   console.log("Day1", Day);
-  if (Day != "Saturday") {
-    bed24Func.getDeparture;
-  }
+  bed24Func.getDeparture;
 });
-const job2 = schedule.scheduleJob("05 * * * 6", function (Day) {
-  console.log("Day2", Day);
-  if (Day === "Saturday") {
-    bed24Func.getDeparture;
-  }
+const job2 = schedule.scheduleJob("05 * * * 6", function (Date) {
+  console.log("Day2", Date);
+  bed24Func.getDeparture;
 });
 // const job2 = schedule.scheduleJob("59 * * * *", bed24Func.getArrival);
 
