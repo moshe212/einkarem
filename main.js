@@ -69,7 +69,7 @@ client.on("authenticated", (session) => {
 // });
 client.initialize();
 
-const job1 = schedule.scheduleJob("43 * * * 0-5", bed24Func.getDeparture);
+const job1 = schedule.scheduleJob("52 * * * 0-5", bed24Func.getDeparture);
 
 const job2 = schedule.scheduleJob("0 21 * * 6", bed24Func.getDeparture);
 
@@ -77,6 +77,7 @@ const job2 = schedule.scheduleJob("0 21 * * 6", bed24Func.getDeparture);
 
 app.post("/api/CreateInvoice", async (req, res) => {
   console.log("data", req.body);
+  const pageCode = process.env.pageCode;
   const transactionId = req.body.data.transactionId;
   const transactionToken = req.body.data.transactionToken;
   const paymentSum = req.body.data.sum;
