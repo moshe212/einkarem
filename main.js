@@ -77,19 +77,23 @@ const job2 = schedule.scheduleJob("0 21 * * 6", bed24Func.getDeparture);
 
 app.post("/api/CreateInvoice", async (req, res) => {
   console.log("data", req.body);
-  // const url = `https://sandbox.meshulam.co.il/api/light/server/1.0/createPaymentProcess/?pageCode=${pageCode}&userId=${userId}&apiKey=&sum=${sum}&successUrl=${successUrl}&cancelUrl=${cancelUrl}&description=${description}&paymentNum=&maxPaymentNum=1&pageField[fullName]=${fullName}&pageField[phone]=${phone}&cField1=${bookId}&cField2=${place}`;
-  // await axios({
-  //   method: "post",
-  //   url: url,
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //   },
-  // }).then(function (response) {
-  //   console.log("Status:", response.statusCode);
-  //   console.log("Headers:", JSON.stringify(response.headers));
-  //   console.log("Response:", response.data.data.url);
-  //   PayUrl = response.data.data.url;
-  // });
+  const transactionId = req.body.data.transactionId;
+  const transactionToken = req.body.data.transactionToken;
+  const paymentSum = req.body.data.sum;
+
+  const url = `https://sandbox.meshulam.co.il/api/light/server/1.0/approveTransaction/?pageCode=${pageCode}&transactionId=${transactionId}&transactionToken=${transactionToken}&paymentSum=${paymentSum}`;
+  console.log("urlApprove", url);
+  await axios({
+    method: "post",
+    url: url,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  }).then(function (response) {
+    console.log("Status:", response.statusCode);
+    console.log("Headers:", JSON.stringify(response.headers));
+    console.log("ResponseApprove:", response.data.status);
+  });
 
   const apiKey = process.env.apiKey;
   const propKeys = [process.env.propKey1, process.env.propKey2];
