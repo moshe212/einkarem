@@ -14,10 +14,11 @@ const getPayLink = async (
   fullName
 ) => {
   let PayUrl = "";
-  const url = `https://sandbox.meshulam.co.il/api/light/server/1.0/createPaymentProcess/?pageCode=${pageCode}&userId=${userId}&apiKey=&sum=${sum}&successUrl=${successUrl}&cancelUrl=${cancelUrl}&description=${description}&paymentNum=&maxPaymentNum=1&pageField[fullName]=${fullName}&pageField[phone]=${phone}&cField1=${bookId}&cField2=${place}`;
-  const encoded_Url = encodeURIComponent(url);
+  const url = `https://sandbox.meshulam.co.il/api/light/server/1.0/createPaymentProcess/?pageCode=${pageCode}&userId=${userId}&apiKey=&sum=${sum}&successUrl=${successUrl}&cancelUrl=${cancelUrl}&description=${description}&paymentNum=&maxPaymentNum=1&pageField[fullName]=${encodeURIComponent(
+    fullName
+  )}&pageField[phone]=${phone}&cField1=${bookId}&cField2=${place}`;
   console.log("url", url);
-  console.log("encoded_Url", encoded_Url);
+
   //   request(
   //     {
   //       method: "POST",
@@ -41,7 +42,7 @@ const getPayLink = async (
   //   );
   await axios({
     method: "post",
-    url: encoded_Url,
+    url: url,
     headers: {
       "Content-Type": "application/json",
     },
