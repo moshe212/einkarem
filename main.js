@@ -69,7 +69,7 @@ client.on("authenticated", (session) => {
 // });
 client.initialize();
 
-const job1 = schedule.scheduleJob("42 * * * 0-5", bed24Func.getDeparture);
+const job1 = schedule.scheduleJob("53 * * * 0-5", bed24Func.getDeparture);
 
 const job2 = schedule.scheduleJob("0 21 * * 6", bed24Func.getDeparture);
 
@@ -142,6 +142,21 @@ app.post("/api/CreateInvoice", async (req, res) => {
         console.log(error);
       });
   } else {
+    // Load the session data if it has been previously saved
+    let sessionData;
+    if (fs.existsSync("session.json")) {
+      console.log("exist");
+      sessionData = await require(SESSION_FILE_PATH);
+    } else {
+      console.log("not");
+    }
+
+    const client = new Client({
+      session: sessionData,
+      puppeteer: {
+        args: ["--no-sandbox"],
+      },
+    });
     const bookid = req.body.data.customFields.cField1;
     const textMessagePayError =
       "גביית התשלום באשראי עבור הזמנה מספר " + bookid + " לא עברה בהצלחה.";
