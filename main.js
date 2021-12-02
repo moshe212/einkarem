@@ -77,7 +77,7 @@ const job2 = schedule.scheduleJob("0 21 * * 6", bed24Func.getDeparture);
 
 app.post("/api/CreateInvoice", async (req, res) => {
   console.log("data", req.body);
-  const pageCode = "12345"; // process.env.pageCode;
+  const pageCode = process.env.pageCode;
   const transactionId = req.body.data.transactionId;
   const transactionToken = req.body.data.transactionToken;
   const paymentSum = req.body.data.sum;
