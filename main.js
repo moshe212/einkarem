@@ -69,7 +69,7 @@ client.on("authenticated", (session) => {
 // });
 client.initialize();
 
-const job1 = schedule.scheduleJob("29 * * * 0-5", bed24Func.getDeparture);
+const job1 = schedule.scheduleJob("42 * * * 0-5", bed24Func.getDeparture);
 
 const job2 = schedule.scheduleJob("0 21 * * 6", bed24Func.getDeparture);
 
@@ -81,7 +81,7 @@ app.post("/api/CreateInvoice", async (req, res) => {
   const transactionId = req.body.data.transactionId;
   const transactionToken = req.body.data.transactionToken;
   const paymentSum = req.body.data.sum;
-
+  let approveStatus = "";
   const url = `https://sandbox.meshulam.co.il/api/light/server/1.0/approveTransaction/?pageCode=${pageCode}&transactionId=${transactionId}&transactionToken=${transactionToken}&paymentSum=${paymentSum}`;
   console.log("urlApprove", url);
   await axios({
@@ -92,9 +92,10 @@ app.post("/api/CreateInvoice", async (req, res) => {
     },
   }).then(function (response) {
     console.log("ResponseApprove:", response.data.status);
+    approveStatus = response.data.status;
   });
 
-  if (parseInt(response.data.status) === 1) {
+  if (parseInt(approveStatus) === 1) {
     const apiKey = process.env.apiKey;
     const propKeys = [process.env.propKey1, process.env.propKey2];
     const bookid = req.body.data.customFields.cField1;
