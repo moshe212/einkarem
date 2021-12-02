@@ -69,7 +69,7 @@ client.on("authenticated", (session) => {
 // });
 client.initialize();
 
-const job1 = schedule.scheduleJob("53 * * * 0-5", bed24Func.getDeparture);
+const job1 = schedule.scheduleJob("04 * * * 0-5", bed24Func.getDeparture);
 
 const job2 = schedule.scheduleJob("0 21 * * 6", bed24Func.getDeparture);
 
@@ -157,6 +157,10 @@ app.post("/api/CreateInvoice", async (req, res) => {
         args: ["--no-sandbox"],
       },
     });
+    client.on("ready", () => {
+      console.log("Client is ready3!");
+    });
+    await client.initialize();
     const bookid = req.body.data.customFields.cField1;
     const textMessagePayError =
       "גביית התשלום באשראי עבור הזמנה מספר " + bookid + " לא עברה בהצלחה.";
