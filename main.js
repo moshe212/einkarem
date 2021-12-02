@@ -69,19 +69,27 @@ client.on("authenticated", (session) => {
 // });
 client.initialize();
 
-const job1 = schedule.scheduleJob("15 * * * 0-5", function (Date) {
-  const Day = moment(Date).format("dddd");
-  console.log("Day1", Day);
-  bed24Func.getDeparture;
-});
-const job2 = schedule.scheduleJob("05 * * * 6", function (Date) {
-  console.log("Day2", Date);
-  bed24Func.getDeparture;
-});
+const job1 = schedule.scheduleJob("38 * * * 0-5", bed24Func.getDeparture);
+
+const job2 = schedule.scheduleJob("0 21 * * 6", bed24Func.getDeparture);
+
 // const job2 = schedule.scheduleJob("59 * * * *", bed24Func.getArrival);
 
 app.post("/api/CreateInvoice", async (req, res) => {
   console.log("data", req.body);
+  // const url = `https://sandbox.meshulam.co.il/api/light/server/1.0/createPaymentProcess/?pageCode=${pageCode}&userId=${userId}&apiKey=&sum=${sum}&successUrl=${successUrl}&cancelUrl=${cancelUrl}&description=${description}&paymentNum=&maxPaymentNum=1&pageField[fullName]=${fullName}&pageField[phone]=${phone}&cField1=${bookId}&cField2=${place}`;
+  // await axios({
+  //   method: "post",
+  //   url: url,
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  // }).then(function (response) {
+  //   console.log("Status:", response.statusCode);
+  //   console.log("Headers:", JSON.stringify(response.headers));
+  //   console.log("Response:", response.data.data.url);
+  //   PayUrl = response.data.data.url;
+  // });
 
   const apiKey = process.env.apiKey;
   const propKeys = [process.env.propKey1, process.env.propKey2];
@@ -107,6 +115,13 @@ app.post("/api/CreateInvoice", async (req, res) => {
             price: req.body.data.sum,
             vatRate: "17",
             type: "200",
+          },
+        ],
+        infoItems: [
+          {
+            infoItemId: "12345678",
+            code: "PAYMENT",
+            text: "Paid $200",
           },
         ],
       },
