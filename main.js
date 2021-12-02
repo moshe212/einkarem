@@ -69,7 +69,7 @@ client.on("authenticated", (session) => {
 // });
 client.initialize();
 
-const job1 = schedule.scheduleJob("07 * * * 0-5", bed24Func.getDeparture);
+const job1 = schedule.scheduleJob("29 * * * 0-5", bed24Func.getDeparture);
 
 const job2 = schedule.scheduleJob("0 21 * * 6", bed24Func.getDeparture);
 
@@ -77,7 +77,7 @@ const job2 = schedule.scheduleJob("0 21 * * 6", bed24Func.getDeparture);
 
 app.post("/api/CreateInvoice", async (req, res) => {
   console.log("data", req.body);
-  const pageCode = process.env.pageCode;
+  const pageCode = "12345"; // process.env.pageCode;
   const transactionId = req.body.data.transactionId;
   const transactionToken = req.body.data.transactionToken;
   const paymentSum = req.body.data.sum;
@@ -91,52 +91,61 @@ app.post("/api/CreateInvoice", async (req, res) => {
       "Content-Type": "application/json",
     },
   }).then(function (response) {
-    console.log("Status:", response.statusCode);
-    console.log("Headers:", JSON.stringify(response.headers));
     console.log("ResponseApprove:", response.data.status);
   });
 
-  const apiKey = process.env.apiKey;
-  const propKeys = [process.env.propKey1, process.env.propKey2];
-  const bookid = req.body.data.customFields.cField1;
-  const propid = req.body.data.customFields.cField2;
-  const propkey =
-    propid === "123250" ? propKeys[0] : propid === "115824" ? propKeys[1] : "";
+  if (parseInt(response.data.status) === 1) {
+    const apiKey = process.env.apiKey;
+    const propKeys = [process.env.propKey1, process.env.propKey2];
+    const bookid = req.body.data.customFields.cField1;
+    const propid = req.body.data.customFields.cField2;
+    const propkey =
+      propid === "123250"
+        ? propKeys[0]
+        : propid === "115824"
+        ? propKeys[1]
+        : "";
 
-  console.log("propid", propid, bookid);
-  await axios
-    .get("https://api.beds24.com/json/setBooking", {
-      data: {
-        authentication: {
-          apiKey: apiKey,
-          propKey: propkey,
+    console.log("propid", propid, bookid);
+    await axios
+      .get("https://api.beds24.com/json/setBooking", {
+        data: {
+          authentication: {
+            apiKey: apiKey,
+            propKey: propkey,
+          },
+          bookId: bookid,
+          assignInvoiceNumber: true,
+          invoice: [
+            {
+              description: "שולם בכרטיס אשראי באמצעות הבוט",
+              qty: "-1",
+              price: req.body.data.sum,
+              vatRate: "17",
+              type: "200",
+            },
+          ],
+          infoItems: [
+            {
+              infoItemId: "12345678",
+              code: "PAYMENT",
+              text: "Paid $200",
+            },
+          ],
         },
-        bookId: bookid,
-        assignInvoiceNumber: true,
-        invoice: [
-          {
-            description: "שולם בכרטיס אשראי באמצעות הבוט",
-            qty: "-1",
-            price: req.body.data.sum,
-            vatRate: "17",
-            type: "200",
-          },
-        ],
-        infoItems: [
-          {
-            infoItemId: "12345678",
-            code: "PAYMENT",
-            text: "Paid $200",
-          },
-        ],
-      },
-    })
-    .then(function (res) {
-      console.log("resCreateInvoice", res.data);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+      })
+      .then(function (res) {
+        console.log("resCreateInvoice", res.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  } else {
+    const bookid = req.body.data.customFields.cField1;
+    const textMessagePayError =
+      "גביית התשלום באשראי עבור הזמנה מספר " + bookid + " לא עברה בהצלחה.";
+    await client.sendMessage("972523587990@c.us", textMessagePayError);
+  }
 
   res.send("non rout");
   //   res.sendFile(path.join(__dirname + "/Client/build/index.html"));
