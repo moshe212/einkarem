@@ -172,15 +172,20 @@ const getAnswer = async (
         const apiKey = process.env.apiKey;
         const propKeys = [process.env.propKey1, process.env.propKey2];
         const bookid = BookId;
+        console.log("Place", Place);
+        console.log("BookId", bookid);
+        console.log("DrinkPriceTotal", DrinkPriceTotal.toString());
+        console.log("apiKey", apiKey);
+
         const propkey =
           Place === "123250"
-            ? propKeys[0]
-            : Place === "115824"
             ? propKeys[1]
+            : Place === "115824"
+            ? propKeys[0]
             : "";
-
+        console.log(propkey);
         await axios
-          .post("https://api.beds24.com/json/setBooking", {
+          .get("https://api.beds24.com/json/setBooking", {
             data: {
               authentication: {
                 apiKey: apiKey,
@@ -190,8 +195,9 @@ const getAnswer = async (
               invoice: [
                 {
                   description: "פרטי מיני בר",
+                  status: "",
                   qty: "1",
-                  price: DrinkPriceTotal,
+                  price: "50",
                   vatRate: "17",
                 },
               ],
