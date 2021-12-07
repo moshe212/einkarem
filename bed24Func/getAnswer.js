@@ -169,6 +169,17 @@ const getAnswer = async (
         );
 
         // Add invoice item
+        const apiKey = process.env.apiKey;
+        const propKeys = [process.env.propKey1, process.env.propKey2];
+        const bookid = req.body.data.customFields.cField1;
+        const propid = req.body.data.customFields.cField2;
+        const propkey =
+          propid === "123250"
+            ? propKeys[0]
+            : propid === "115824"
+            ? propKeys[1]
+            : "";
+
         await axios
           .post("https://api.beds24.com/json/setBooking", {
             data: {
