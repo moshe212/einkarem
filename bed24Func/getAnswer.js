@@ -1,4 +1,5 @@
 const fs = require("fs");
+const axios = require("axios");
 const { updateStageFile } = require("./updateStageFile");
 const { getDrinkPriceTotal } = require("./getDrinkPriceTotal");
 const { getPayLink } = require("./getPayLink");
@@ -166,6 +167,32 @@ const getAnswer = async (
           Phone,
           Payment
         );
+
+        // Add invoice item
+        await axios
+          .post("https://api.beds24.com/json/setBooking", {
+            data: {
+              authentication: {
+                apiKey: apiKey,
+                propKey: propkey,
+              },
+              bookId: bookid,
+              invoice: [
+                {
+                  description: "פרטי מיני בר",
+                  qty: "1",
+                  price: DrinkPriceTotal,
+                  vatRate: "17",
+                },
+              ],
+            },
+          })
+          .then(function (res) {
+            console.log("resCreateInvoice", res.data);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
         break;
       } else {
         textMessage1 = "נא בחר באחת מהאפשרויות המוצגות בשאלה.";

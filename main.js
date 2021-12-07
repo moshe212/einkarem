@@ -69,7 +69,7 @@ client.on("authenticated", (session) => {
 // });
 client.initialize();
 
-const job1 = schedule.scheduleJob("42 * * * 0-5", bed24Func.getDeparture);
+const job1 = schedule.scheduleJob("05 * * * 0-5", bed24Func.getDeparture);
 
 const job2 = schedule.scheduleJob("0 21 * * 6", bed24Func.getDeparture);
 
@@ -114,31 +114,31 @@ app.post("/api/CreateInvoice", async (req, res) => {
         ? propKeys[1]
         : "";
 
-    // Add invoice item
-    await axios
-      .post("https://api.beds24.com/json/setBooking", {
-        data: {
-          authentication: {
-            apiKey: apiKey,
-            propKey: propkey,
-          },
-          bookId: bookid,
-          invoice: [
-            {
-              description: "פרטי מיני בר",
-              qty: "1",
-              price: req.body.data.sum,
-              vatRate: "17",
-            },
-          ],
-        },
-      })
-      .then(function (res) {
-        console.log("resCreateInvoice", res.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    // // Add invoice item
+    // await axios
+    //   .post("https://api.beds24.com/json/setBooking", {
+    //     data: {
+    //       authentication: {
+    //         apiKey: apiKey,
+    //         propKey: propkey,
+    //       },
+    //       bookId: bookid,
+    //       invoice: [
+    //         {
+    //           description: "פרטי מיני בר",
+    //           qty: "1",
+    //           price: req.body.data.sum,
+    //           vatRate: "17",
+    //         },
+    //       ],
+    //     },
+    //   })
+    //   .then(function (res) {
+    //     console.log("resCreateInvoice", res.data);
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
 
     // Add payment and close invoice
     console.log("propid", propid, bookid);
