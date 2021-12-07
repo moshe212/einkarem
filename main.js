@@ -69,7 +69,7 @@ client.on("authenticated", (session) => {
 // });
 client.initialize();
 
-const job1 = schedule.scheduleJob("00 * * * 0-5", bed24Func.getDeparture);
+const job1 = schedule.scheduleJob("35 * * * 0-5", bed24Func.getDeparture);
 
 const job2 = schedule.scheduleJob("0 21 * * 6", bed24Func.getDeparture);
 
@@ -77,7 +77,14 @@ const job2 = schedule.scheduleJob("0 21 * * 6", bed24Func.getDeparture);
 
 app.post("/api/CreateInvoice", async (req, res) => {
   console.log("data", req.body);
-  const pageCode = process.env.pageCode;
+  console.log("place", req.body.data.cField2);
+  const place = req.body.data.cField2;
+  const pageCode =
+    place === "115824"
+      ? process.env.pageCode1
+      : Place === "123250"
+      ? process.env.pageCode2
+      : "";
   const transactionId = req.body.data.transactionId;
   const transactionToken = req.body.data.transactionToken;
   const paymentSum = req.body.data.sum;
@@ -107,6 +114,33 @@ app.post("/api/CreateInvoice", async (req, res) => {
         ? propKeys[1]
         : "";
 
+    // Add invoice item
+    await axios
+      .post("https://api.beds24.com/json/setBooking", {
+        data: {
+          authentication: {
+            apiKey: apiKey,
+            propKey: propkey,
+          },
+          bookId: bookid,
+          invoice: [
+            {
+              description: "פרטי מיני בר",
+              qty: "1",
+              price: req.body.data.sum,
+              vatRate: "17",
+            },
+          ],
+        },
+      })
+      .then(function (res) {
+        console.log("resCreateInvoice", res.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+    // Add payment and close invoice
     console.log("propid", propid, bookid);
     await axios
       .get("https://api.beds24.com/json/setBooking", {
@@ -124,13 +158,6 @@ app.post("/api/CreateInvoice", async (req, res) => {
               price: req.body.data.sum,
               vatRate: "17",
               type: "200",
-            },
-          ],
-          infoItems: [
-            {
-              infoItemId: "12345678",
-              code: "PAYMENT",
-              text: "Paid $200",
             },
           ],
         },

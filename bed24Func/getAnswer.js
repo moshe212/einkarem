@@ -20,8 +20,18 @@ const getAnswer = async (
   let StageForUpdate = 0;
   let Payment = 0;
   const tel = "0" + Phone.substring(3, 12);
-  const pageCode = process.env.pageCode;
-  const userId = process.env.userId;
+  const pageCode =
+    Place === "115824"
+      ? process.env.pageCode1
+      : Place === "123250"
+      ? process.env.pageCode2
+      : "";
+  const userId =
+    Place === "115824"
+      ? process.env.userId
+      : Place === "123250"
+      ? process.env.userId
+      : "";
   const successUrl = "";
   const cancelUrl = "";
   const PAYBOX_Link =
