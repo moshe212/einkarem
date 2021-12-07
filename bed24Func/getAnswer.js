@@ -171,12 +171,11 @@ const getAnswer = async (
         // Add invoice item
         const apiKey = process.env.apiKey;
         const propKeys = [process.env.propKey1, process.env.propKey2];
-        const bookid = req.body.data.customFields.cField1;
-        const propid = req.body.data.customFields.cField2;
+        const bookid = BookId;
         const propkey =
-          propid === "123250"
+          Place === "123250"
             ? propKeys[0]
-            : propid === "115824"
+            : Place === "115824"
             ? propKeys[1]
             : "";
 
