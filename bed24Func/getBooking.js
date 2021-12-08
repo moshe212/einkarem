@@ -48,7 +48,6 @@ const getBooking = async (Arrival) => {
               }
               console.log("totalPrice1", totalPrice);
               Bookings.push({
-                price: totalPrice,
                 firstNight: res.data[b].firstNight,
                 lastNight: res.data[b].lastNight,
                 numAdult: res.data[b].numAdult,
@@ -60,7 +59,7 @@ const getBooking = async (Arrival) => {
                 guestPhone: res.data[b].guestPhone,
                 bookId: res.data[b].bookId,
                 roomId: res.data[b].roomId,
-
+                price: totalPrice,
                 propId: res.data[b].propId,
                 referer: res.data[b].referer,
                 lang: res.data[b].lang,
