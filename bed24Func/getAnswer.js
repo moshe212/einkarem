@@ -29,9 +29,9 @@ const getAnswer = async (
       : "";
   const userId =
     Place === "115824"
-      ? process.env.userId
+      ? process.env.userId1
       : Place === "123250"
-      ? process.env.userId
+      ? process.env.userId2
       : "";
   const successUrl = "";
   const cancelUrl = "";

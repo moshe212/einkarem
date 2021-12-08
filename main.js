@@ -69,7 +69,7 @@ client.on("authenticated", (session) => {
 // });
 client.initialize();
 
-const job1 = schedule.scheduleJob("30 * * * 0-5", bed24Func.getDeparture);
+const job1 = schedule.scheduleJob("41 * * * 0-5", bed24Func.getDeparture);
 
 const job2 = schedule.scheduleJob("0 21 * * 6", bed24Func.getDeparture);
 
@@ -77,8 +77,8 @@ const job2 = schedule.scheduleJob("0 21 * * 6", bed24Func.getDeparture);
 
 app.post("/api/CreateInvoice", async (req, res) => {
   console.log("data", req.body);
-  console.log("place", req.body.data.cField2);
-  const place = req.body.data.cField2;
+  const place = req.body.data.customFields.cField2;
+  console.log("place", place);
   const pageCode =
     place === "115824"
       ? process.env.pageCode1
