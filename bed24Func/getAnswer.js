@@ -197,7 +197,7 @@ const getAnswer = async (
                   description: "פרטי מיני בר",
                   status: "",
                   qty: "1",
-                  price: "50",
+                  price: DrinkPriceTotal,
                   vatRate: "17",
                 },
               ],
