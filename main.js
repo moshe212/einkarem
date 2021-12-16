@@ -69,7 +69,7 @@ client.on("authenticated", (session) => {
 // });
 client.initialize();
 
-const job1 = schedule.scheduleJob("27 * * * 0-5", bed24Func.getDeparture);
+const job1 = schedule.scheduleJob("20 * * * 0-5", bed24Func.getDeparture);
 
 const job2 = schedule.scheduleJob("0 21 * * 6", bed24Func.getDeparture);
 
@@ -89,7 +89,7 @@ app.post("/api/CreateInvoice", async (req, res) => {
   const transactionToken = req.body.data.transactionToken;
   const paymentSum = req.body.data.sum;
   let approveStatus = "";
-  const url = `https://sandbox.meshulam.co.il/api/light/server/1.0/approveTransaction/?pageCode=${pageCode}&transactionId=${transactionId}&transactionToken=${transactionToken}&paymentSum=${paymentSum}`;
+  const url = `https://secure.meshulam.co.il/api/light/server/1.0/approveTransaction/?pageCode=${pageCode}&transactionId=${transactionId}&transactionToken=${transactionToken}&paymentSum=${paymentSum}`;
   console.log("urlApprove", url);
   await axios({
     method: "post",
