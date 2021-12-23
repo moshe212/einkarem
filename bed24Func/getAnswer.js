@@ -74,7 +74,7 @@ const getAnswer = async (
           "\nאנחנו אף פעם לא גובים תשלום מראש. כרטיס האשראי שניתן בעת ביצוע ההזמנה ניתן לביטחון בלבד";
         textMessage2 =
           "כיצד תרצו להסדיר את השתלום:" +
-          "\n1️⃣ תשלום במזומן \n2️⃣ תשלום בהעברה בנקאית \n3️⃣ תשלום בכרטיס אשראי \n4️⃣ תשלום באפליקציית PAYBOX \n5️⃣ תשלום באפליקציית PAY";
+          "\n1️⃣ תשלום במזומן \n2️⃣ תשלום בהעברה בנקאית \n3️⃣ תשלום בכרטיס אשראי \n4️⃣ תשלום באפליקציית PAYBOX";
         Answer.push(textMessage1, textMessage2);
         StageForUpdate = 1;
         await updateStageFile(BookingList, true, StageForUpdate, Phone);
@@ -122,17 +122,17 @@ const getAnswer = async (
           textMessage2 = PAYBOX_Link;
           Answer.push(textMessage1, textMessage2);
           break;
-        case 5:
-          textMessage1 =
-            "תודה רבה. להלן קישור לביצוע התשלום באמצעות אפליקציית PAY";
-          textMessage2 = "LINK";
-          Answer.push(textMessage1, textMessage2);
-          break;
+        // case 5:
+        //   textMessage1 =
+        //     "תודה רבה. להלן קישור לביצוע התשלום באמצעות אפליקציית PAY";
+        //   textMessage2 = "LINK";
+        //   Answer.push(textMessage1, textMessage2);
+        //   break;
         default:
           textMessage1 = "נא בחר באחת מהאפשרויות המוצגות בשאלה.";
           Answer.push(textMessage1);
       }
-      if ([1, 2, 3, 4, 5].includes(parseInt(ReciveMsg))) {
+      if ([1, 2, 3, 4].includes(parseInt(ReciveMsg))) {
         StageForUpdate = 10;
         await updateStageFile(BookingList, true, StageForUpdate, Phone);
       }
@@ -153,11 +153,12 @@ const getAnswer = async (
           "תודה רבה. הסכום לתשלום כולל מעמ הוא: " +
           "*" +
           Payment +
+          "ש'ח" +
           "*" +
           "\nאנחנו אף פעם לא גובים תשלום מראש. כרטיס האשראי שניתן בעת ביצוע ההזמנה ניתן לביטחון בלבד.";
         textMessage2 =
           "כיצד תרצו להסדיר את התשלום:" +
-          "\n1️⃣ תשלום במזומן \n2️⃣ תשלום בהעברה בנקאית \n3️⃣ תשלום בכרטיס אשראי \n4️⃣ תשלום באפליקציית PAYBOX \n5️⃣ תשלום באפליקציית PAY";
+          "\n1️⃣ תשלום במזומן \n2️⃣ תשלום בהעברה בנקאית \n3️⃣ תשלום בכרטיס אשראי \n4️⃣ תשלום באפליקציית PAYBOX";
         Answer.push(textMessage1, textMessage2);
         StageForUpdate = 3;
         await updateStageFile(
@@ -254,17 +255,17 @@ const getAnswer = async (
           textMessage2 = PAYBOX_Link;
           Answer.push(textMessage1, textMessage2);
           break;
-        case 5:
-          textMessage1 =
-            "תודה רבה. להלן קישור לביצוע התשלום באמצעות אפליקציית PAY";
-          textMessage2 = "LINK";
-          Answer.push(textMessage1, textMessage2);
-          break;
+        // case 5:
+        //   textMessage1 =
+        //     "תודה רבה. להלן קישור לביצוע התשלום באמצעות אפליקציית PAY";
+        //   textMessage2 = "LINK";
+        //   Answer.push(textMessage1, textMessage2);
+        //   break;
         default:
           textMessage1 = "נא בחר באחת מהאפשרויות המוצגות בשאלה.";
           Answer.push(textMessage1);
       }
-      if ([1, 2, 3, 4, 5].includes(parseInt(ReciveMsg))) {
+      if ([1, 2, 3, 4].includes(parseInt(ReciveMsg))) {
         StageForUpdate = 11;
         await updateStageFile(BookingList, true, StageForUpdate, Phone);
       }

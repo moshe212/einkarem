@@ -5,7 +5,7 @@ const getBooking = async (Arrival) => {
   const apiKey = process.env.apiKey;
   const propKeys = [process.env.propKey1, process.env.propKey2];
   const Today = moment()
-    .add(2, "days")
+    .add(1, "days")
     .format("YYYY-MM-DD")
     .replace("-", "")
     .replace("-", "");
@@ -21,54 +21,43 @@ const getBooking = async (Arrival) => {
           },
           ...(Arrival ? { arrivalFrom: Today } : { departureFrom: Today }),
           ...(Arrival ? { arrivalTo: Today } : { departureTo: Today }),
+          includeInvoice: true,
+          status: 1,
         },
       })
       .then(function (res) {
         // console.log("res", res.data);
         for (let b = 0; b < res.data.length; b++) {
+          // console.log('inv', res.data[r].invoice)
           let totalPrice = 0;
-          axios
-            .get("https://api.beds24.com/json/getInvoices", {
-              data: {
-                authentication: {
-                  apiKey: apiKey,
-                  propKey: propKeys[i],
-                },
-                bookId: res.data[b].bookId,
-              },
-            })
-            .then(function (Invoice_res) {
-              console.log("Invoice_res", Invoice_res.data);
-              console.log("totalPrice", totalPrice);
-              for (let v = 0; v < Invoice_res.data[0].length; v++) {
-                const itemPrice =
-                  parseInt(Invoice_res.data[0][v].price) *
-                  parseInt(Invoice_res.data[0][v].qty);
-                totalPrice = parseInt(totalPrice) + itemPrice;
-              }
-              console.log("totalPrice1", totalPrice);
-              Bookings.push({
-                firstNight: res.data[b].firstNight,
-                lastNight: res.data[b].lastNight,
-                numAdult: res.data[b].numAdult,
-                numChild: res.data[b].numChild,
-                guestFirstName: res.data[b].guestFirstName,
-                guestName: res.data[b].guestName,
-                guestEmail: res.data[b].guestEmail,
-                guestMobile: res.data[b].guestMobile,
-                guestPhone: res.data[b].guestPhone,
-                bookId: res.data[b].bookId,
-                roomId: res.data[b].roomId,
-                price: totalPrice,
-                propId: res.data[b].propId,
-                referer: res.data[b].referer,
-                lang: res.data[b].lang,
-                guestCountry: res.data[b].guestCountry,
-                guestCountry2: res.data[b].guestCountry2,
-                group: res.data[b].group,
-                masterId: res.data[b].masterId,
-              });
-            });
+          for (let r = 0; r < res.data[b].invoice.length; r++) {
+            const itemPrice =
+              parseInt(res.data[b].invoice[r].price) *
+              parseInt(res.data[b].invoice[r].qty);
+            totalPrice = parseInt(totalPrice) + itemPrice;
+          }
+          // console.log("totalPrice1", totalPrice);
+          Bookings.push({
+            firstNight: res.data[b].firstNight,
+            lastNight: res.data[b].lastNight,
+            numAdult: res.data[b].numAdult,
+            numChild: res.data[b].numChild,
+            guestFirstName: res.data[b].guestFirstName,
+            guestName: res.data[b].guestName,
+            guestEmail: res.data[b].guestEmail,
+            guestMobile: res.data[b].guestMobile,
+            guestPhone: res.data[b].guestPhone,
+            bookId: res.data[b].bookId,
+            roomId: res.data[b].roomId,
+            price: totalPrice,
+            propId: res.data[b].propId,
+            referer: res.data[b].referer,
+            lang: res.data[b].lang,
+            guestCountry: res.data[b].guestCountry,
+            guestCountry2: res.data[b].guestCountry2,
+            group: res.data[b].group,
+            masterId: res.data[b].masterId,
+          });
         }
       })
       .catch(function (error) {

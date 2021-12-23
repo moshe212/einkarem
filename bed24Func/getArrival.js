@@ -28,7 +28,7 @@ const getArrival = async () => {
   });
   await client.initialize();
   const BookingList = await getBooking(true);
-  console.log(BookingList);
+  console.log("BookingList", BookingList);
   for (let i = 0; i < BookingList.length; i++) {
     const number =
       BookingList[i].guestMobile.length > 0
@@ -58,7 +58,8 @@ const getArrival = async () => {
     let Text1 = "";
     let Text2 = "";
 
-    if (isIsraeli && isMaster) {
+    console.log("Number1", Number);
+    if (isIsraeli && isMaster && Number == "972504593125@c.us") {
       Text1 =
         BookingList[i].propId === "123250"
           ? "שלום " +
@@ -110,9 +111,9 @@ const getArrival = async () => {
           : "";
 
       console.log(Number);
-      await client.sendMessage("972523587990@c.us", Text1);
-      await client.sendMessage("972523587990@c.us", Text2);
-    } else if (isMaster) {
+      await client.sendMessage("972504593125@c.us", Text1);
+      await client.sendMessage("972504593125@c.us", Text2);
+    } else if (isMaster && Number == "972504593125@c.us") {
       Text1 =
         BookingList[i].propId === "123250"
           ? "Good morning " +
@@ -163,8 +164,8 @@ const getArrival = async () => {
           : "";
 
       console.log(Number);
-      await client.sendMessage("972523587990@c.us", Text1);
-      await client.sendMessage("972523587990@c.us", Text2);
+      await client.sendMessage("972504593125@c.us", Text1);
+      await client.sendMessage("972504593125@c.us", Text2);
     }
   }
 };
