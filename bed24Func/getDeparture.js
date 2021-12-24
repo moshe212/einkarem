@@ -59,6 +59,7 @@ const getDeparture = async () => {
       const PriceMAAM = isBookingSite ? Price * 1.17 : Price;
       const Place = stagesData.bookinglist[index].propId;
       const FirstName = stagesData.bookinglist[index].guestFirstName;
+      const LastName = stagesData.bookinglist[index].guestLastName;
       // console.log("Place1", Place);
       isIsraeli =
         stagesData.bookinglist[index].lang === "HE" ||
@@ -84,7 +85,7 @@ const getDeparture = async () => {
           BookingList,
           Place,
           BookId,
-          FirstName
+          FirstName + " " + LastName
         );
         for (let i = 0; i < Answer.length; i++) {
           await client.sendMessage(msg.from, Answer[i]);
@@ -156,11 +157,12 @@ const getDeparture = async () => {
       ", שמחנו לארח אתכם. אנחנו מקווים שנהניתם ורוצים להזכיר ששעת היציאה מהחדרים היא *12:00* (אלא אם כן צוין אחרת בהזמנה)." +
       "\nעל מנת להקל עליכם את תהליך היציאה מהחדרים, אתם מוזמנים לבצע אותו בקלות כעת באמצעות הוואטסאפ.";
     const textMessage2 = "האם השתמשת במיני בר שבחדר?" + "\n1️⃣ כן \n2️⃣ לא";
-    console.log("Number", Number);
-    if (isIsraeli && !isGroup && Number == "972523587990@c.us") {
+    console.log("Number", Number, isIsraeli, isGroup);
+    if (isIsraeli && !isGroup && Number == "972555647508@c.us") {
       // && Number == "972523587990@c.us"
-      await client.sendMessage("972523587990@c.us", textMessage1);
-      await client.sendMessage("972523587990@c.us", textMessage2);
+      console.log("Send");
+      await client.sendMessage("972555647508@c.us", textMessage1);
+      await client.sendMessage("972555647508@c.us", textMessage2);
     }
   }
 };
