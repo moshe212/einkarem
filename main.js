@@ -73,7 +73,7 @@ const job1 = schedule.scheduleJob("30 09 * * 0-5", bed24Func.getDeparture);
 
 const job2 = schedule.scheduleJob("15 21 * * 6", bed24Func.getDeparture);
 
-const job3 = schedule.scheduleJob("00 08 * * 0-5", bed24Func.getArrival);
+const job3 = schedule.scheduleJob("00 14 * * 0-5", bed24Func.getArrival);
 // const job4 = schedule.scheduleJob("0 21 * * 6", bed24Func.getArrival);
 
 app.post("/api/CreateInvoice", async (req, res) => {
