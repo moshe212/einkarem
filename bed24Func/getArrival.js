@@ -22,6 +22,9 @@ const getArrival = async () => {
   }
   const client = new Client({
     session: sessionData,
+    puppeteer: {
+      args: ["--no-sandbox"],
+    },
   });
   client.on("ready", () => {
     console.log("Client is ready2!");
