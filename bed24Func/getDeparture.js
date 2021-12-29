@@ -158,11 +158,11 @@ const getDeparture = async () => {
       "\nעל מנת להקל עליכם את תהליך היציאה מהחדרים, אתם מוזמנים לבצע אותו בקלות כעת באמצעות הוואטסאפ.";
     const textMessage2 = "האם השתמשת במיני בר שבחדר?" + "\n1️⃣ כן \n2️⃣ לא";
     console.log("Number", Number, isIsraeli, isGroup);
-    if (isIsraeli && !isGroup && Number == "972555647508@c.us") {
+    if (isIsraeli && !isGroup) {
       // && Number == "972523587990@c.us"
       console.log("Send");
-      await client.sendMessage("972555647508@c.us", textMessage1);
-      await client.sendMessage("972555647508@c.us", textMessage2);
+      await client.sendMessage(Number, textMessage1);
+      await client.sendMessage(Number, textMessage2);
     }
   }
 };
