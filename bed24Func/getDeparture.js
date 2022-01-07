@@ -17,6 +17,8 @@ const getDeparture = async () => {
   const SESSION_FILE_PATH = "../session.json";
   console.log(SESSION_FILE_PATH);
   const BookingList = await getBooking(false);
+  const day = moment().day();
+  console.log("day", day);
   console.log(BookingList);
   let isIsraeli;
   let isGroup;
@@ -158,7 +160,11 @@ const getDeparture = async () => {
       "\nעל מנת להקל עליכם את תהליך היציאה מהחדרים, אתם מוזמנים לבצע אותו בקלות כעת באמצעות הוואטסאפ.";
     const textMessage2 = "האם השתמשת במיני בר שבחדר?" + "\n1️⃣ כן \n2️⃣ לא";
     console.log("Number", Number, isIsraeli, isGroup);
-    if (isIsraeli && !isGroup) {
+    if (
+      isIsraeli &&
+      !isGroup &&
+      ((parseInt(day) == 6 && Place == "115824") || parseInt(day) != 6)
+    ) {
       // && Number == "972523587990@c.us"
       console.log("Send");
       await client.sendMessage(Number, textMessage1);
