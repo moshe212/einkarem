@@ -79,6 +79,7 @@ const job3 = schedule.scheduleJob("00 09 * * 0-5", bed24Func.getArrival);
 let state = "";
 const getState = async (state) => {
   state = await client.getState();
+  console.log(state);
 };
 const job5 = schedule.scheduleJob("30 * * * * ", getState);
 
