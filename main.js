@@ -80,7 +80,7 @@ let state = "";
 const getState = async (state) => {
   state = await client.getState();
 };
-const job5 = schedule.scheduleJob("* * * * * ", getState);
+const job5 = schedule.scheduleJob("30 * * * * ", getState);
 
 app.post("/api/CreateInvoice", async (req, res) => {
   console.log("data", req.body);
