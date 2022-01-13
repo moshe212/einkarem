@@ -77,10 +77,10 @@ const job3 = schedule.scheduleJob("00 09 * * 0-5", bed24Func.getArrival);
 
 // const job4 = schedule.scheduleJob("0 21 * * 6", bed24Func.getArrival);
 let state = "";
-const getState = (state) => {
+const getState = async (state) => {
   state = await client.getState();
 };
-const job5 = schedule.scheduleJob("* * * * * ", bed24Func.getState);
+const job5 = schedule.scheduleJob("* * * * * ", getState);
 
 app.post("/api/CreateInvoice", async (req, res) => {
   console.log("data", req.body);
