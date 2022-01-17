@@ -73,7 +73,7 @@ const sendCheckInOut = async () => {
 
 // const job3 = schedule.scheduleJob("00 09 * * 0-5", bed24Func.getArrival);
 
-const job4 = schedule.scheduleJob("00 09 * * 0-5", sendCheckInOut);
+const job4 = schedule.scheduleJob("30 09 * * 0-5", sendCheckInOut);
 
 let state = "";
 const getState = async (state) => {
