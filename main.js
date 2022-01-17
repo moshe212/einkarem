@@ -60,28 +60,27 @@ client.on("authenticated", (session) => {
   });
 });
 
-// client.on("message", (message) => {
-//   if (message.body === "ping") {
-//     console.log(message.from);
-
-//     client.sendMessage(message.from, "pong");
-//   }
-// });
 client.initialize();
 
-const job1 = schedule.scheduleJob("30 09 * * 0-5", bed24Func.getDeparture);
+const sendCheckInOut = async () => {
+  await bed24Func.getDeparture();
+  await bed24Func.getArrival();
+};
 
-const job2 = schedule.scheduleJob("00 16 * * 6", bed24Func.getDeparture);
+// const job1 = schedule.scheduleJob("30 09 * * 0-5", bed24Func.getDeparture);
 
-const job3 = schedule.scheduleJob("22 09 * * 0-5", bed24Func.getArrival);
+// const job2 = schedule.scheduleJob("00 16 * * 6", bed24Func.getDeparture);
 
-// const job4 = schedule.scheduleJob("0 21 * * 6", bed24Func.getArrival);
+// const job3 = schedule.scheduleJob("00 09 * * 0-5", bed24Func.getArrival);
+
+const job4 = schedule.scheduleJob("00 09 * * 0-5", sendCheckInOut);
+
 let state = "";
 const getState = async (state) => {
   state = await client.getState();
   console.log(state);
 };
-const job5 = schedule.scheduleJob("* 5 * * * ", getState);
+const job5 = schedule.scheduleJob("5 * * * * ", getState);
 
 app.post("/api/CreateInvoice", async (req, res) => {
   console.log("data", req.body);
