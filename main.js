@@ -77,10 +77,14 @@ const job4 = schedule.scheduleJob("50 09 * * 0-5", sendCheckInOut);
 
 let state = "";
 const getState = async (state) => {
-  state = await client.getState();
-  console.log(state);
+  if (client) {
+    state = await client.getState();
+    console.log(state);
+  } else {
+    console.log("sesion is closed");
+  }
 };
-const job5 = schedule.scheduleJob("5 * * * * ", getState);
+const job5 = schedule.scheduleJob("*/5 * * * * ", getState);
 
 app.post("/api/CreateInvoice", async (req, res) => {
   console.log("data", req.body);
@@ -172,7 +176,7 @@ app.post("/api/CreateInvoice", async (req, res) => {
         },
       })
       .then(function (res) {
-        console.log("resCreateInvoice", res.data);
+        console.log("resCreateInvoice_main", res.data);
       })
       .catch(function (error) {
         console.log(error);
