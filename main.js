@@ -65,8 +65,6 @@ client.initialize();
 const sendCheckInOut = async () => {
   await bed24Func.getArrival();
   await bed24Func.getDeparture();
-  const ret = "test";
-  return ret;
 };
 
 // const job1 = schedule.scheduleJob("30 09 * * 0-5", bed24Func.getDeparture);
@@ -76,7 +74,6 @@ const sendCheckInOut = async () => {
 // const job3 = schedule.scheduleJob("00 09 * * 0-5", bed24Func.getArrival);
 
 const job4 = schedule.scheduleJob("50 09 * * 0-5", sendCheckInOut);
-console.log("job4", job4);
 
 let state = "";
 const getState = async (state) => {
@@ -88,6 +85,11 @@ const getState = async (state) => {
   }
 };
 const job5 = schedule.scheduleJob("*/5 * * * * ", getState);
+
+// let BookingList = ''
+const job6 = schedule.scheduleJob("* * * * 0-5", bed24Func.getBooking(false));
+console.log("job6", job6);
+const BookingList = await bed24Func.getBooking(false);
 
 app.post("/api/CreateInvoice", async (req, res) => {
   console.log("data", req.body);
@@ -190,7 +192,7 @@ app.post("/api/CreateInvoice", async (req, res) => {
 
 app.post("/api/GetMessage", async (req, res) => {
   console.log("GetMessage", req.body);
-  const BookingList = await bed24Func.getBooking(false);
+
   const sender =
     req.body.query.sender.replace(" ", "").replace("+", "").replace("-", "") +
     "@c.us";
@@ -250,7 +252,14 @@ app.post("/api/GetMessage", async (req, res) => {
     }
   } else {
     console.log("msg from not in stages file");
-    res.send("שלום, אנו שמחים שפניתם אלינו, נתפנה לתת שירות בהקדם");
+    const Ans = {
+      replies: [
+        {
+          message: "שלום, אנו שמחים שפניתם אלינו, נתפנה לתת שירות בהקדם",
+        },
+      ],
+    };
+    res.send(Ans);
   }
 });
 
