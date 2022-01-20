@@ -87,7 +87,9 @@ const getState = async (state) => {
 const job5 = schedule.scheduleJob("*/5 * * * * ", getState);
 
 // let BookingList = ''
-const job6 = schedule.scheduleJob("* * * * 0-5", bed24Func.getBooking(false));
+const job6 = schedule.scheduleJob("* * * * 0-5", function () {
+  bed24Func.getBooking(false);
+});
 console.log("job6", job6);
 const BookingList = bed24Func.getBooking(false);
 
