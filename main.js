@@ -127,32 +127,6 @@ app.post("/api/CreateInvoice", async (req, res) => {
         ? propKeys[1]
         : "";
 
-    // // Add invoice item
-    // await axios
-    //   .post("https://api.beds24.com/json/setBooking", {
-    //     data: {
-    //       authentication: {
-    //         apiKey: apiKey,
-    //         propKey: propkey,
-    //       },
-    //       bookId: bookid,
-    //       invoice: [
-    //         {
-    //           description: "פרטי מיני בר",
-    //           qty: "1",
-    //           price: req.body.data.sum,
-    //           vatRate: "17",
-    //         },
-    //       ],
-    //     },
-    //   })
-    //   .then(function (res) {
-    //     console.log("resCreateInvoice", res.data);
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
-
     // Add payment and close invoice
     console.log("propid", propid, bookid);
     await axios
@@ -209,6 +183,72 @@ app.post("/api/CreateInvoice", async (req, res) => {
 
   res.send("non rout");
   //   res.sendFile(path.join(__dirname + "/Client/build/index.html"));
+});
+
+app.post("/api/GetMessage", async (req, res) => {
+  console.log("GetMessage", req.body);
+  const sender =
+    req.body.query.sender.replace(" ", "").replace("+", "").replace("-", "") +
+    "@c.us";
+  const message = req.body.query.message;
+
+  let stagesData;
+  const data = fs.readFileSync("stages.json", {
+    encoding: "utf8",
+    flag: "r",
+  });
+  stagesData = await JSON.parse(data);
+
+  console.log("sender", sender);
+  console.log("stagesData", stagesData.bookinglist);
+  const index = await stagesData.bookinglist.findIndex(
+    (x) => x.phone === sender
+  );
+  console.log("idx", index);
+  if (index >= 0) {
+    const BookingList = await getBooking(false);
+
+    const BookId = stagesData.bookinglist[index].bookId;
+    const isBookingSite =
+      stagesData.bookinglist[index].referer === "Booking.com" ? true : false;
+    const Stage = stagesData.bookinglist[index].stage;
+    const Price = parseFloat(stagesData.bookinglist[index].price);
+    const PriceMAAM = isBookingSite ? Price * 1.17 : Price;
+    const Place = stagesData.bookinglist[index].propId;
+    const FirstName = stagesData.bookinglist[index].guestFirstName;
+    const LastName = stagesData.bookinglist[index].guestLastName;
+    // console.log("Place1", Place);
+    isIsraeli =
+      stagesData.bookinglist[index].lang === "HE" ||
+      stagesData.bookinglist[index].lang === "he" ||
+      stagesData.bookinglist[index].guestCountry === "il" ||
+      stagesData.bookinglist[index].guestCountry === "IL" ||
+      stagesData.bookinglist[index].guestCountry2 === "IL" ||
+      stagesData.bookinglist[index].guestCountry2 === "il"
+        ? true
+        : false;
+    isGroup =
+      stagesData.bookinglist[index].group !== undefined ||
+      stagesData.bookinglist[index].masterId !== ""
+        ? true
+        : false;
+    console.log("isIsraeli", isIsraeli, isGroup);
+    if (isIsraeli && !isGroup) {
+      const Answer = await getAnswer(
+        message,
+        sender,
+        Stage,
+        PriceMAAM,
+        BookingList,
+        Place,
+        BookId,
+        FirstName + " " + LastName
+      );
+      res.send(Answer);
+    }
+  } else {
+    console.log("msg from not in stages file");
+  }
 });
 
 app.get("*", (req, res) => {

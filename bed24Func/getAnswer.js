@@ -276,7 +276,44 @@ const getAnswer = async (
     default:
       console.log(`Sorry, we are out of range.`);
   }
-  return Answer;
+  // return Answer;
+
+  // Change for getMessage new rout
+  const jsonFile =
+    textMessage3 !== ""
+      ? {
+          replies: [
+            {
+              message: Answer[0],
+            },
+            {
+              message: Answer[1],
+            },
+            {
+              message: Answer[2],
+            },
+          ],
+        }
+      : textMessage2 !== ""
+      ? {
+          replies: [
+            {
+              message: Answer[0],
+            },
+            {
+              message: Answer[1],
+            },
+          ],
+        }
+      : {
+          replies: [
+            {
+              message: Answer[0],
+            },
+          ],
+        };
+
+  return jsonFile;
 };
 
 module.exports = { getAnswer };

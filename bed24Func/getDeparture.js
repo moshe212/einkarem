@@ -38,67 +38,67 @@ const getDeparture = async () => {
     },
   });
 
-  client.on("message", async (msg) => {
-    let stagesData;
-    const data = fs.readFileSync("stages.json", {
-      encoding: "utf8",
-      flag: "r",
-    });
-    stagesData = await JSON.parse(data);
+  // client.on("message", async (msg) => {
+  //   let stagesData;
+  //   const data = fs.readFileSync("stages.json", {
+  //     encoding: "utf8",
+  //     flag: "r",
+  //   });
+  //   stagesData = await JSON.parse(data);
 
-    console.log("msgFrom", msg.from);
-    console.log("stagesData", stagesData.bookinglist);
-    const index = await stagesData.bookinglist.findIndex(
-      (x) => x.phone === msg.from
-    );
-    console.log("idx", index);
-    if (index >= 0) {
-      const BookId = stagesData.bookinglist[index].bookId;
-      const isBookingSite =
-        stagesData.bookinglist[index].referer === "Booking.com" ? true : false;
-      const Stage = stagesData.bookinglist[index].stage;
-      const Price = parseFloat(stagesData.bookinglist[index].price);
-      const PriceMAAM = isBookingSite ? Price * 1.17 : Price;
-      const Place = stagesData.bookinglist[index].propId;
-      const FirstName = stagesData.bookinglist[index].guestFirstName;
-      const LastName = stagesData.bookinglist[index].guestLastName;
-      // console.log("Place1", Place);
-      isIsraeli =
-        stagesData.bookinglist[index].lang === "HE" ||
-        stagesData.bookinglist[index].lang === "he" ||
-        stagesData.bookinglist[index].guestCountry === "il" ||
-        stagesData.bookinglist[index].guestCountry === "IL" ||
-        stagesData.bookinglist[index].guestCountry2 === "IL" ||
-        stagesData.bookinglist[index].guestCountry2 === "il"
-          ? true
-          : false;
-      isGroup =
-        stagesData.bookinglist[index].group !== undefined ||
-        stagesData.bookinglist[index].masterId !== ""
-          ? true
-          : false;
-      console.log("isIsraeli", isIsraeli, isGroup);
-      if (isIsraeli && !isGroup) {
-        const Answer = await getAnswer(
-          msg.body,
-          msg.from,
-          Stage,
-          PriceMAAM,
-          BookingList,
-          Place,
-          BookId,
-          FirstName + " " + LastName
-        );
-        for (let i = 0; i < Answer.length; i++) {
-          await client.sendMessage(msg.from, Answer[i]);
-        }
-      }
-    } else {
-      console.log("msg from not in stages file");
-    }
+  //   console.log("msgFrom", msg.from);
+  //   console.log("stagesData", stagesData.bookinglist);
+  //   const index = await stagesData.bookinglist.findIndex(
+  //     (x) => x.phone === msg.from
+  //   );
+  //   console.log("idx", index);
+  //   if (index >= 0) {
+  //     const BookId = stagesData.bookinglist[index].bookId;
+  //     const isBookingSite =
+  //       stagesData.bookinglist[index].referer === "Booking.com" ? true : false;
+  //     const Stage = stagesData.bookinglist[index].stage;
+  //     const Price = parseFloat(stagesData.bookinglist[index].price);
+  //     const PriceMAAM = isBookingSite ? Price * 1.17 : Price;
+  //     const Place = stagesData.bookinglist[index].propId;
+  //     const FirstName = stagesData.bookinglist[index].guestFirstName;
+  //     const LastName = stagesData.bookinglist[index].guestLastName;
+  //     // console.log("Place1", Place);
+  //     isIsraeli =
+  //       stagesData.bookinglist[index].lang === "HE" ||
+  //       stagesData.bookinglist[index].lang === "he" ||
+  //       stagesData.bookinglist[index].guestCountry === "il" ||
+  //       stagesData.bookinglist[index].guestCountry === "IL" ||
+  //       stagesData.bookinglist[index].guestCountry2 === "IL" ||
+  //       stagesData.bookinglist[index].guestCountry2 === "il"
+  //         ? true
+  //         : false;
+  //     isGroup =
+  //       stagesData.bookinglist[index].group !== undefined ||
+  //       stagesData.bookinglist[index].masterId !== ""
+  //         ? true
+  //         : false;
+  //     console.log("isIsraeli", isIsraeli, isGroup);
+  //     if (isIsraeli && !isGroup) {
+  //       const Answer = await getAnswer(
+  //         msg.body,
+  //         msg.from,
+  //         Stage,
+  //         PriceMAAM,
+  //         BookingList,
+  //         Place,
+  //         BookId,
+  //         FirstName + " " + LastName
+  //       );
+  //       for (let i = 0; i < Answer.length; i++) {
+  //         await client.sendMessage(msg.from, Answer[i]);
+  //       }
+  //     }
+  //   } else {
+  //     console.log("msg from not in stages file");
+  //   }
 
-    // await updateStageFile(BookingList, true, Stage, msg.from);
-  });
+  //   // await updateStageFile(BookingList, true, Stage, msg.from);
+  // });
 
   client.on("ready", () => {
     console.log("Client is ready2!");
