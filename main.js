@@ -65,7 +65,10 @@ client.initialize();
 const sendCheckInOut = async () => {
   await bed24Func.getArrival();
   await bed24Func.getDeparture();
+  const BookingList = await getBooking(false);
+  return BookingList;
 };
+const BookingList = await getBooking(false);
 
 // const job1 = schedule.scheduleJob("30 09 * * 0-5", bed24Func.getDeparture);
 
@@ -74,6 +77,7 @@ const sendCheckInOut = async () => {
 // const job3 = schedule.scheduleJob("00 09 * * 0-5", bed24Func.getArrival);
 
 const job4 = schedule.scheduleJob("50 09 * * 0-5", sendCheckInOut);
+console.log("job4", job4);
 
 let state = "";
 const getState = async (state) => {
@@ -206,8 +210,6 @@ app.post("/api/GetMessage", async (req, res) => {
   );
   console.log("idx", index);
   if (index >= 0) {
-    const BookingList = await getBooking(false);
-
     const BookId = stagesData.bookinglist[index].bookId;
     const isBookingSite =
       stagesData.bookinglist[index].referer === "Booking.com" ? true : false;
