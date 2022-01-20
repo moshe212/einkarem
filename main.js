@@ -65,10 +65,9 @@ client.initialize();
 const sendCheckInOut = async () => {
   await bed24Func.getArrival();
   await bed24Func.getDeparture();
-  const BookingList = await getBooking(false);
-  return BookingList;
+  const ret = "test";
+  return ret;
 };
-const BookingList = await getBooking(false);
 
 // const job1 = schedule.scheduleJob("30 09 * * 0-5", bed24Func.getDeparture);
 
@@ -191,6 +190,7 @@ app.post("/api/CreateInvoice", async (req, res) => {
 
 app.post("/api/GetMessage", async (req, res) => {
   console.log("GetMessage", req.body);
+  const BookingList = await getBooking(false);
   const sender =
     req.body.query.sender.replace(" ", "").replace("+", "").replace("-", "") +
     "@c.us";
@@ -250,6 +250,7 @@ app.post("/api/GetMessage", async (req, res) => {
     }
   } else {
     console.log("msg from not in stages file");
+    res.send("שלום, אנו שמחים שפניתם אלינו, נתפנה לתת שירות בהקדם");
   }
 });
 
