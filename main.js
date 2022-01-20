@@ -190,7 +190,7 @@ app.post("/api/CreateInvoice", async (req, res) => {
 
 app.post("/api/GetMessage", async (req, res) => {
   console.log("GetMessage", req.body);
-  const BookingList = await getBooking(false);
+  const BookingList = await bed24Func.getBooking(false);
   const sender =
     req.body.query.sender.replace(" ", "").replace("+", "").replace("-", "") +
     "@c.us";
