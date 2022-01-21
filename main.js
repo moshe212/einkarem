@@ -255,14 +255,14 @@ app.post("/api/GetMessage", async (req, res) => {
     }
   } else {
     console.log("msg from not in stages file");
-    const Ans = {
-      replies: [
-        {
-          message: "שלום, אנו שמחים שפניתם אלינו, נתפנה לתת שירות בהקדם",
-        },
-      ],
-    };
-    res.send(Ans);
+    // const Ans = {
+    //   replies: [
+    //     {
+    //       message: "שלום, אנו שמחים שפניתם אלינו, נתפנה לתת שירות בהקדם",
+    //     },
+    //   ],
+    // };
+    // res.send(Ans);
   }
 });
 
