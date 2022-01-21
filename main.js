@@ -69,7 +69,7 @@ const sendCheckInOut = async () => {
 
 // const job1 = schedule.scheduleJob("30 09 * * 0-5", bed24Func.getDeparture);
 
-// const job2 = schedule.scheduleJob("00 16 * * 6", bed24Func.getDeparture);
+const job2 = schedule.scheduleJob("00 16 * * 6", bed24Func.getDeparture);
 
 // const job3 = schedule.scheduleJob("00 09 * * 0-5", bed24Func.getArrival);
 
@@ -197,8 +197,11 @@ app.post("/api/GetMessage", async (req, res) => {
   console.log("GetMessage", req.body);
   const BookingList = await bed24Func.getBooking(false);
   const sender =
-    req.body.query.sender.replace(" ", "").replace("+", "").replace("-", "") +
-    "@c.us";
+    req.body.query.sender
+      .replace(" ", "")
+      .replace("+", "")
+      .replace("-", "")
+      .replace("-", "") + "@c.us";
   const message = req.body.query.message;
 
   let stagesData;
