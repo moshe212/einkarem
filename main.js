@@ -77,6 +77,8 @@ const job4 = schedule.scheduleJob("50 09 * * 0-5", sendCheckInOut);
 
 let state = "";
 const getState = async (state) => {
+  if (fs.existsSync("session.json")) {
+    console.log("exist");
   if (client) {
     state = await client.getState();
     console.log(state);
