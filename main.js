@@ -33,7 +33,7 @@ const { bed24Func } = require("./bed24Func");
 let sessionData;
 
 const client = new Client({
-  qrTimeoutMs: 0,
+  // qrTimeoutMs: 0,
   puppeteer: {
     args: ["--no-sandbox"],
   },
