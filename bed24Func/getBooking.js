@@ -22,7 +22,7 @@ const getBooking = async (Arrival) => {
           ...(Arrival ? { arrivalFrom: Today } : { departureFrom: Today }),
           ...(Arrival ? { arrivalTo: Today } : { departureTo: Today }),
           includeInvoice: true,
-          status: 1,
+          status: [1, 2],
         },
       })
       .then(function (res) {
