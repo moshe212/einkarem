@@ -79,6 +79,7 @@ let state = "";
 const getState = async (state) => {
   if (fs.existsSync("session.json")) {
     console.log("session file exist");
+  }
   if (client) {
     state = await client.getState();
     console.log(state);
