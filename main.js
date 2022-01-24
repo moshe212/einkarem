@@ -73,8 +73,8 @@ const job2 = schedule.scheduleJob("00 16 * * 6", bed24Func.getDeparture);
 
 // const job3 = schedule.scheduleJob("00 09 * * 0-5", bed24Func.getArrival);
 
-const job4 = schedule.scheduleJob("25 11 * * 0-5", sendCheckInOut);
-const job4 = schedule.scheduleJob("00 06 * * 0-5", sendCheckInOut);
+const job4 = schedule.scheduleJob("30 11 * * 0-5", sendCheckInOut);
+const job5 = schedule.scheduleJob("00 06 * * 0-5", sendCheckInOut);
 
 let state = "";
 const getState = async (state) => {
