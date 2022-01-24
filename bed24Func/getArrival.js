@@ -30,8 +30,6 @@ const getArrival = async () => {
     console.log("Client is ready2!");
   });
 
-  client.pupPage.click("#pane-side");
-
   await client.initialize();
   const BookingList = await getBooking(true);
   console.log("BookingList", BookingList);
