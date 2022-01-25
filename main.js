@@ -82,8 +82,12 @@ const getState = async (state) => {
     console.log("session file exist");
   }
   if (client) {
-    state = await client.getState();
-    console.log(state);
+    try {
+      state = await client.getState();
+      console.log(state);
+    } catch {
+      console.log("sesion is closed");
+    }
   } else {
     console.log("sesion is closed");
   }
