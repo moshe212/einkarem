@@ -3,3 +3,6 @@
 # dependencies
 /node_modules
 .env
+session.json
+stages.json
+package-lock.json
