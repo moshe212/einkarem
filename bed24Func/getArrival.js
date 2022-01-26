@@ -115,10 +115,10 @@ const getArrival = async () => {
           : "";
 
       console.log(Number);
-      // await client.sendMessage(Number, Text1);
-      // await client.sendMessage(Number, Text2);
-      await client.sendMessage("972523587990@c.us", Text1);
-      await client.sendMessage("972523587990@c.us", Text2);
+      await client.sendMessage(Number, Text1);
+      await client.sendMessage(Number, Text2);
+      // await client.sendMessage("972523587990@c.us", Text1);
+      // await client.sendMessage("972523587990@c.us", Text2);
     } else if (isMaster) {
       Text1 =
         BookingList[i].propId === "123250"
