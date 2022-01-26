@@ -30,6 +30,16 @@ const getArrival = async () => {
     console.log("Client is ready2!");
   });
 
+  // Save session values to the file upon successful auth
+  client.on("authenticated", (session) => {
+    sessionData = session;
+    fs.writeFile(SESSION_FILE_PATH, JSON.stringify(session), (err) => {
+      if (err) {
+        console.error(err);
+      }
+    });
+  });
+
   await client.initialize();
   const BookingList = await getBooking(true);
   console.log("BookingList", BookingList);
@@ -115,10 +125,10 @@ const getArrival = async () => {
           : "";
 
       console.log(Number);
-      await client.sendMessage(Number, Text1);
-      await client.sendMessage(Number, Text2);
-      // await client.sendMessage("972523587990@c.us", Text1);
-      // await client.sendMessage("972523587990@c.us", Text2);
+      // await client.sendMessage(Number, Text1);
+      // await client.sendMessage(Number, Text2);
+      await client.sendMessage("972523587990@c.us", Text1);
+      await client.sendMessage("972523587990@c.us", Text2);
     } else if (isMaster) {
       Text1 =
         BookingList[i].propId === "123250"

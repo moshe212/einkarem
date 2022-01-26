@@ -103,6 +103,17 @@ const getDeparture = async () => {
   client.on("ready", () => {
     console.log("Client is ready2!");
   });
+
+  // Save session values to the file upon successful auth
+  client.on("authenticated", (session) => {
+    sessionData = session;
+    fs.writeFile(SESSION_FILE_PATH, JSON.stringify(session), (err) => {
+      if (err) {
+        console.error(err);
+      }
+    });
+  });
+
   await client.initialize();
 
   // if (fs.existsSync("stages.json")) {

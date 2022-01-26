@@ -24,6 +24,6 @@
     "qrcode-terminal": "^0.12.0",
     "request": "^2.88.2",
     "upload": "^1.1.1",
-    "whatsapp-web.js": "^1.15.3"
+    "whatsapp-web.js": "^1.15.4"
   }
 }

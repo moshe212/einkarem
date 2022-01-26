@@ -64,7 +64,7 @@ client.initialize();
 
 const sendCheckInOut = async () => {
   await bed24Func.getArrival();
-  await bed24Func.getDeparture();
+  // await bed24Func.getDeparture();
 };
 
 // const job1 = schedule.scheduleJob("30 09 * * 0-5", bed24Func.getDeparture);
