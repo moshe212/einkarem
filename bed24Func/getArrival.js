@@ -12,15 +12,15 @@ const phoneUtil =
 const getArrival = async () => {
   // Path where the session data will be stored
   const SESSION_FILE_PATH = "../session.json";
-  const LogFilePath = "../logs.txt";
+  const LogFilePath = "./logs.txt";
   console.log(SESSION_FILE_PATH);
   // Load the session data if it has been previously saved
   let sessionData;
   if (fs.existsSync("session.json")) {
     console.log("exist");
     const now = moment().format("MMMM Do YYYY, h:mm:ss a");
-    const data = `${now} Session file is exist getArrival`;
-    fs.writeFile(LogFilePath, data, (err) => {
+    const data = `\n ${now} Session file is exist getArrival`;
+    fs.appendFile(LogFilePath, data, (err) => {
       if (err) {
         console.error(err);
       }
@@ -29,8 +29,8 @@ const getArrival = async () => {
   } else {
     console.log("not");
     const now = moment().format("MMMM Do YYYY, h:mm:ss a");
-    const data = `${now} Session file is not exist getArrival`;
-    fs.writeFile(LogFilePath, data, (err) => {
+    const data = `\n ${now} Session file is not exist getArrival`;
+    fs.appendFile(LogFilePath, data, (err) => {
       if (err) {
         console.error(err);
       }
@@ -45,8 +45,8 @@ const getArrival = async () => {
   client.on("ready", () => {
     console.log("Client is ready2!");
     const now = moment().format("MMMM Do YYYY, h:mm:ss a");
-    const data = `${now} Client is ready getArrival`;
-    fs.writeFile(LogFilePath, data, (err) => {
+    const data = `\n ${now} Client is ready getArrival`;
+    fs.appendFile(LogFilePath, data, (err) => {
       if (err) {
         console.error(err);
       }
@@ -62,8 +62,8 @@ const getArrival = async () => {
       }
     });
     const now = moment().format("MMMM Do YYYY, h:mm:ss a");
-    const data = `${now} Session file is update getArrival`;
-    fs.writeFile(LogFilePath, data, (err) => {
+    const data = `\n ${now} Session file is update getArrival`;
+    fs.appendFile(LogFilePath, data, (err) => {
       if (err) {
         console.error(err);
       }
@@ -210,8 +210,10 @@ const getArrival = async () => {
           : "";
 
       console.log(Number);
-      await client.sendMessage(Number, Text1);
-      await client.sendMessage(Number, Text2);
+      // await client.sendMessage(Number, Text1);
+      // await client.sendMessage(Number, Text2);
+      await client.sendMessage("972523587990@c.us", Text1);
+      await client.sendMessage("972523587990@c.us", Text2);
     }
   }
 };

@@ -15,7 +15,7 @@ const phoneUtil =
 const getDeparture = async () => {
   // Path where the session data will be stored
   const SESSION_FILE_PATH = "../session.json";
-  const LogFilePath = "../logs.txt";
+  const LogFilePath = "./logs.txt";
   console.log(SESSION_FILE_PATH);
   const BookingList = await getBooking(false);
   const day = moment().day();
@@ -29,8 +29,8 @@ const getDeparture = async () => {
   if (fs.existsSync("session.json")) {
     console.log("exist");
     const now = moment().format("MMMM Do YYYY, h:mm:ss a");
-    const data = `${now} Session file is exist getDearture`;
-    fs.writeFile(LogFilePath, data, (err) => {
+    const data = `\n ${now} Session file is exist getDearture`;
+    fs.appendFile(LogFilePath, data, (err) => {
       if (err) {
         console.error(err);
       }
@@ -39,8 +39,8 @@ const getDeparture = async () => {
   } else {
     console.log("not");
     const now = moment().format("MMMM Do YYYY, h:mm:ss a");
-    const data = `${now} Session file is not exist getDearture`;
-    fs.writeFile(LogFilePath, data, (err) => {
+    const data = `\n ${now} Session file is not exist getDearture`;
+    fs.appendFile(LogFilePath, data, (err) => {
       if (err) {
         console.error(err);
       }
@@ -119,8 +119,8 @@ const getDeparture = async () => {
   client.on("ready", () => {
     console.log("Client is ready2!");
     const now = moment().format("MMMM Do YYYY, h:mm:ss a");
-    const data = `${now} Client is ready getDearture`;
-    fs.writeFile(LogFilePath, data, (err) => {
+    const data = `\n ${now} Client is ready getDearture`;
+    fs.appendFile(LogFilePath, data, (err) => {
       if (err) {
         console.error(err);
       }
@@ -136,8 +136,8 @@ const getDeparture = async () => {
       }
     });
     const now = moment().format("MMMM Do YYYY, h:mm:ss a");
-    const data = `${now} Session file is update getDearture`;
-    fs.writeFile(LogFilePath, data, (err) => {
+    const data = `\n ${now} Session file is update getDearture`;
+    fs.appendFile(LogFilePath, data, (err) => {
       if (err) {
         console.error(err);
       }
@@ -170,6 +170,8 @@ const getDeparture = async () => {
   await createStageFile(BookingList);
 
   for (let i = 0; i < BookingList.length; i++) {
+    const Place = BookingList[i].propId;
+    console.log("Place1", Place);
     isIsraeli =
       BookingList[i].lang === "HE" ||
       BookingList[i].lang === "he" ||

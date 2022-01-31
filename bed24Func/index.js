@@ -6,6 +6,7 @@ const { updateStageFile } = require("./updateStageFile");
 const { getAnswer } = require("./getAnswer");
 const { getDrinkPriceTotal } = require("./getDrinkPriceTotal");
 const { getPayLink } = require("./getPayLink");
+const { reConnection } = require("./reConnection");
 
 const bed24Func = {
   getBooking,
@@ -16,6 +17,7 @@ const bed24Func = {
   getAnswer,
   getDrinkPriceTotal,
   getPayLink,
+  reConnection,
 };
 
 module.exports = { bed24Func };

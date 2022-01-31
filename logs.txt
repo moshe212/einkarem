@@ -1,0 +1,81 @@
+
+ January 28th 2022, 12:18:00 pm Session file is exist getArrival
+ January 28th 2022, 12:18:17 pm Session file is update getArrival
+ January 28th 2022, 12:18:22 pm Client is ready getArrival
+ January 28th 2022, 3:36:00 pm Session file is exist getArrival
+ January 28th 2022, 3:38:00 pm Session file is exist getArrival
+ January 28th 2022, 3:38:20 pm Session file is update getArrival
+ January 28th 2022, 3:38:26 pm Client is ready getArrival
+ January 29th 2022, 7:00:00 pm Session file is exist getDearture
+ January 29th 2022, 7:00:21 pm Session file is update getDearture
+ January 30th 2022, 9:30:00 am Session file is exist getArrival
+ January 30th 2022, 9:30:20 am Session file is update getArrival
+ January 30th 2022, 9:30:24 am Client is ready getArrival
+ January 30th 2022, 9:30:26 am Session file is exist getDearture
+ January 30th 2022, 9:30:48 am Session file is update getDearture
+ January 30th 2022, 9:30:54 am Client is ready getDearture
+ January 31st 2022, 9:30:00 am Session file is exist getArrival
+ January 31st 2022, 9:30:20 am Session file is update getArrival
+ January 31st 2022, 9:30:23 am Client is ready getArrival
+ January 31st 2022, 9:30:24 am Session file is exist getDearture
+ January 31st 2022, 9:30:41 am Session file is update getDearture
+ January 31st 2022, 9:30:46 am Client is ready getDearture
+ January 31st 2022, 12:00:00 pm Session file is exist getArrival
+ January 31st 2022, 12:00:19 pm Session file is update getArrival
+ January 31st 2022, 12:00:26 pm Client is ready getArrival
+ January 31st 2022, 12:01:00 pm Session file is exist getArrival
+ January 31st 2022, 12:01:20 pm Session file is update getArrival
+ January 31st 2022, 12:01:26 pm Client is ready getArrival
+ January 31st 2022, 12:02:00 pm Session file is exist getArrival
+ January 31st 2022, 12:02:21 pm Session file is update getArrival
+ January 31st 2022, 12:02:24 pm Client is ready getArrival
+ January 31st 2022, 12:03:00 pm Session file is exist getArrival
+ January 31st 2022, 12:03:26 pm Session file is update getArrival
+ January 31st 2022, 12:03:31 pm Client is ready getArrival
+ January 31st 2022, 12:04:00 pm Session file is exist getArrival
+ January 31st 2022, 12:04:18 pm Session file is update getArrival
+ January 31st 2022, 12:04:22 pm Client is ready getArrival
+ January 31st 2022, 12:05:00 pm Session file is exist getArrival
+ January 31st 2022, 12:05:21 pm Session file is update getArrival
+ January 31st 2022, 12:05:24 pm Client is ready getArrival
+ January 31st 2022, 12:06:00 pm Session file is exist getArrival
+ January 31st 2022, 12:06:21 pm Session file is update getArrival
+ January 31st 2022, 12:06:25 pm Client is ready getArrival
+ January 31st 2022, 12:07:00 pm Session file is exist getArrival
+ January 31st 2022, 12:07:19 pm Session file is update getArrival
+ January 31st 2022, 12:07:24 pm Client is ready getArrival
+ January 31st 2022, 12:08:00 pm Session file is exist getArrival
+ January 31st 2022, 12:08:28 pm Session file is update getArrival
+ January 31st 2022, 12:08:38 pm Client is ready getArrival
+ January 31st 2022, 12:09:00 pm Session file is exist getArrival
+ January 31st 2022, 12:10:00 pm Session file is exist getArrival
+ January 31st 2022, 12:10:12 pm Session file is update getArrival
+ January 31st 2022, 12:10:24 pm Client is ready getArrival
+ January 31st 2022, 12:11:00 pm Session file is exist getArrival
+ January 31st 2022, 12:11:23 pm Session file is update getArrival
+ January 31st 2022, 12:11:26 pm Client is ready getArrival
+ January 31st 2022, 12:12:00 pm Session file is exist getArrival
+ January 31st 2022, 12:12:19 pm Session file is update getArrival
+ January 31st 2022, 12:12:21 pm Client is ready getArrival
+ January 31st 2022, 12:13:00 pm Session file is exist getArrival
+ January 31st 2022, 12:13:17 pm Session file is update getArrival
+ January 31st 2022, 12:13:23 pm Client is ready getArrival
+ January 31st 2022, 12:14:00 pm Session file is exist getArrival
+ January 31st 2022, 12:14:20 pm Session file is update getArrival
+ January 31st 2022, 12:14:24 pm Client is ready getArrival
+ January 31st 2022, 12:15:00 pm Session file is exist getArrival
+ January 31st 2022, 12:15:17 pm Session file is update getArrival
+ January 31st 2022, 12:15:22 pm Client is ready getArrival
+ January 31st 2022, 12:16:00 pm Session file is exist getArrival
+ January 31st 2022, 12:16:19 pm Session file is update getArrival
+ January 31st 2022, 12:16:22 pm Client is ready getArrival
+ January 31st 2022, 12:17:00 pm Session file is exist getArrival
+ January 31st 2022, 12:17:17 pm Session file is update getArrival
+ January 31st 2022, 12:17:21 pm Client is ready getArrival
+ January 31st 2022, 12:18:00 pm Session file is exist getArrival
+ January 31st 2022, 12:18:19 pm Session file is update getArrival
+ January 31st 2022, 12:18:26 pm Client is ready getArrival
+ January 31st 2022, 12:19:00 pm Session file is exist getArrival
+ January 31st 2022, 6:00:00 pm Session file is exist getArrival
+ January 31st 2022, 6:00:25 pm Session file is update getArrival
+ January 31st 2022, 6:00:32 pm Client is ready getArrival

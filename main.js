@@ -33,7 +33,7 @@ const { bed24Func } = require("./bed24Func");
 let sessionData;
 
 const client = new Client({
-  // qrTimeoutMs: 0,
+  qrTimeoutMs: 0,
   puppeteer: {
     args: ["--no-sandbox"],
   },
@@ -64,17 +64,18 @@ client.initialize();
 
 const sendCheckInOut = async () => {
   await bed24Func.getArrival();
-  // await bed24Func.getDeparture();
+  await bed24Func.getDeparture();
 };
 
 // const job1 = schedule.scheduleJob("30 09 * * 0-5", bed24Func.getDeparture);
 
-const job2 = schedule.scheduleJob("00 16 * * 6", bed24Func.getDeparture);
+const job2 = schedule.scheduleJob("28 09 * * 6", bed24Func.getDeparture);
 
 // const job3 = schedule.scheduleJob("00 09 * * 0-5", bed24Func.getArrival);
 
-const job4 = schedule.scheduleJob("14 08 * * 0-5", sendCheckInOut);
+const job4 = schedule.scheduleJob("30 07 * * 0-5", sendCheckInOut);
 // const job6 = schedule.scheduleJob("00 06 * * 0-5", sendCheckInOut);
+const job7 = schedule.scheduleJob("0 */6 * * *", bed24Func.reConnection);
 
 let state = "";
 const getState = async (state) => {
