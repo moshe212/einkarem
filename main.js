@@ -41,7 +41,7 @@ const craeteStageFile = async () => {
   }
   await bed24Func.createStageFile(BookingList);
 };
-const job1 = schedule.scheduleJob("30 09 * * 0-6", craeteStageFile);
+const job1 = schedule.scheduleJob("30 08 * * 0-6", craeteStageFile);
 
 app.post("/api/CreateInvoice", async (req, res) => {
   console.log("data", req.body);
