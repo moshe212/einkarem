@@ -30,78 +30,18 @@ app.use(express.urlencoded());
 
 const { bed24Func } = require("./bed24Func");
 
-let sessionData;
-
-const client = new Client({
-  qrTimeoutMs: 0,
-  puppeteer: {
-    args: ["--no-sandbox"],
-  },
-});
-
-client.on("qr", (qr) => {
-  qrcode.generate(qr, { small: true });
-});
-
-client.on("ready", () => {
-  console.log("Client is ready!");
-});
-
-// Path where the session data will be stored
-const SESSION_FILE_PATH = "./session.json";
-
-// Save session values to the file upon successful auth
-client.on("authenticated", (session) => {
-  sessionData = session;
-  fs.writeFile(SESSION_FILE_PATH, JSON.stringify(session), (err) => {
-    if (err) {
-      console.error(err);
-    }
-  });
-});
-
-client.initialize();
-
-const sendCheckInOut = async () => {
-  await bed24Func.getArrival();
-  await bed24Func.getDeparture();
-};
-
-// const job1 = schedule.scheduleJob("30 09 * * 0-5", bed24Func.getDeparture);
-
-const job2 = schedule.scheduleJob("28 09 * * 6", bed24Func.getDeparture);
-
-// const job3 = schedule.scheduleJob("00 09 * * 0-5", bed24Func.getArrival);
-
-const job4 = schedule.scheduleJob("30 07 * * 0-5", sendCheckInOut);
-// const job6 = schedule.scheduleJob("00 06 * * 0-5", sendCheckInOut);
-const job7 = schedule.scheduleJob("0 */6 * * *", bed24Func.reConnection);
-
-let state = "";
-const getState = async (state) => {
-  if (fs.existsSync("session.json")) {
-    console.log("session file exist");
+const craeteStageFile = async () => {
+  const BookingList = await bed24Func.getBooking(false);
+  try {
+    fs.unlinkSync("stages.json");
+    //file removed
+    console.log("File deleted!");
+  } catch (err) {
+    console.error(err);
   }
-  if (client) {
-    try {
-      state = await client.getState();
-      console.log(state);
-    } catch {
-      console.log("sesion is closed");
-    }
-  } else {
-    console.log("sesion is closed");
-  }
+  await bed24Func.createStageFile(BookingList);
 };
-const job5 = schedule.scheduleJob("*/5 * * * * ", getState);
-
-// let BookingList = "";
-// const job6 = schedule.scheduleJob("* * * * * 0-5", function () {
-//   BookingList = bed24Func.getBooking(false);
-//   console.log("BookingList", BookingList);
-// });
-// console.log("job6", job6);
-// const BookingList = bed24Func.getBooking(false);
+const job1 = schedule.scheduleJob("30 09 * * 0-6", craeteStageFile);
 
 app.post("/api/CreateInvoice", async (req, res) => {
   console.log("data", req.body);
@@ -174,32 +114,33 @@ app.post("/api/CreateInvoice", async (req, res) => {
       });
   } else {
     // Load the session data if it has been previously saved
-    let sessionData;
-    if (fs.existsSync("session.json")) {
-      console.log("exist");
-      sessionData = await require(SESSION_FILE_PATH);
-    } else {
-      console.log("not");
-    }
+    //   let sessionData;
+    //   if (fs.existsSync("session.json")) {
+    //     console.log("exist");
+    //     sessionData = await require(SESSION_FILE_PATH);
+    //   } else {
+    //     console.log("not");
+    //   }
 
-    const client = new Client({
-      session: sessionData,
-      puppeteer: {
-        args: ["--no-sandbox"],
-      },
-    });
-    client.on("ready", () => {
-      console.log("Client is ready3!");
-    });
-    await client.initialize();
-    const bookid = req.body.data.customFields.cField1;
-    const textMessagePayError =
-      "גביית התשלום באשראי עבור הזמנה מספר " + bookid + " לא עברה בהצלחה.";
-    await client.sendMessage("972523587990@c.us", textMessagePayError);
+    //   const client = new Client({
+    //     session: sessionData,
+    //     puppeteer: {
+    //       args: ["--no-sandbox"],
+    //     },
+    //   });
+    //   client.on("ready", () => {
+    //     console.log("Client is ready3!");
+    //   });
+    //   await client.initialize();
+    //   const bookid = req.body.data.customFields.cField1;
+    //   const textMessagePayError =
+    //     "גביית התשלום באשראי עבור הזמנה מספר " + bookid + " לא עברה בהצלחה.";
+    //   await client.sendMessage("972523587990@c.us", textMessagePayError);
+    // }
+    console.log("non rout");
+    res.send("non rout");
+    //   res.sendFile(path.join(__dirname + "/Client/build/index.html"));
   }
-
-  res.send("non rout");
-  //   res.sendFile(path.join(__dirname + "/Client/build/index.html"));
 });
 
 app.post("/api/GetMessage", async (req, res) => {
