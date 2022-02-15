@@ -14,13 +14,13 @@ const createStageFile = async (BookingList) => {
     let Phone = "";
     let Mobile = "";
     const number =
-      BookingList[i].guestMobile.length > 0
-        ? phoneUtil.parseAndKeepRawInput(BookingList[i].guestMobile, "IL")
-        : BookingList[i].guestPhone.length > 0
-        ? phoneUtil.parseAndKeepRawInput(BookingList[i].guestPhone, "IL")
+      BookingList[b].guestMobile.length > 0
+        ? phoneUtil.parseAndKeepRawInput(BookingList[b].guestMobile, "IL")
+        : BookingList[b].guestPhone.length > 0
+        ? phoneUtil.parseAndKeepRawInput(BookingList[b].guestPhone, "IL")
         : "";
     if (number.length > 0) {
-      console.log(i, phoneUtil.format(number, PNF.E164));
+      console.log(b, phoneUtil.format(number, PNF.E164));
       Phone = phoneUtil.format(number, PNF.E164).replace("+", "") + "@c.us";
       Mobile = phoneUtil.format(number, PNF.E164).replace("+", "") + "@c.us";
     } else {
