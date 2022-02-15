@@ -19,8 +19,9 @@ const createStageFile = async (BookingList) => {
         ? phoneUtil.parseAndKeepRawInput(BookingList[b].guestMobile, "IL")
         : BookingList[b].guestPhone.length > 0
         ? phoneUtil.parseAndKeepRawInput(BookingList[b].guestPhone, "IL")
-        : "";
-    if (number.length > 0) {
+        : 0;
+    console.log("number", number != 0);
+    if (number != 0) {
       console.log(b, phoneUtil.format(number, PNF.E164));
       Phone = phoneUtil.format(number, PNF.E164).replace("+", "") + "@c.us";
       Mobile = phoneUtil.format(number, PNF.E164).replace("+", "") + "@c.us";
