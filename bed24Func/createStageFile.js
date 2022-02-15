@@ -7,6 +7,7 @@ const phoneUtil =
   require("google-libphonenumber").PhoneNumberUtil.getInstance();
 
 const createStageFile = async (BookingList) => {
+  console.log("BookingList_craeteStagesFile", BookingList);
   let stagesData = { bookinglist: [] };
   const STAGES_FILE_PATH = "../stages.json";
   console.log("create");
