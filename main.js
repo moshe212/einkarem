@@ -74,8 +74,15 @@ const craeteStageFile = async () => {
     console.error(err);
   }
   await bed24Func.createStageFile(BookingList);
+  let stagesData;
+  const data = fs.readFileSync(STAGES_FILE_PATH, {
+    encoding: "utf8",
+    flag: "r",
+  });
+  stagesData = await JSON.parse(data);
+  console.log("stagesData", stagesData);
 };
-const job1 = schedule.scheduleJob("38 16 * * 0-6", craeteStageFile);
+const job1 = schedule.scheduleJob("56 16 * * 0-6", craeteStageFile);
 
 // const sendCheckInOut = async () => {
 //   await bed24Func.getArrival();
