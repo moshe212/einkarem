@@ -62,7 +62,7 @@ const { bed24Func } = require("./bed24Func");
 
 // client.initialize();
 
-const STAGES_FILE_PATH = "./stages.json";
+const STAGES_FILE_PATH = "stages.json";
 const craeteStageFile = async () => {
   const BookingList = await bed24Func.getBooking(false);
 
@@ -75,7 +75,7 @@ const craeteStageFile = async () => {
   }
   await bed24Func.createStageFile(BookingList);
 };
-const job1 = schedule.scheduleJob("30 16 * * 0-6", craeteStageFile);
+const job1 = schedule.scheduleJob("38 16 * * 0-6", craeteStageFile);
 
 // const sendCheckInOut = async () => {
 //   await bed24Func.getArrival();
