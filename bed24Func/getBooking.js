@@ -22,41 +22,45 @@ const getBooking = async (Arrival) => {
           ...(Arrival ? { arrivalFrom: Today } : { departureFrom: Today }),
           ...(Arrival ? { arrivalTo: Today } : { departureTo: Today }),
           includeInvoice: true,
-          status: [1, 2],
+          // status: [1, 2],
         },
       })
       .then(function (res) {
-        // console.log("res", res.data);
-        for (let b = 0; b < res.data.length; b++) {
+        console.log("res", res.data);
+        const filterdData = res.data.filter(
+          (book) => book.status === "1" || book.status === "2"
+        );
+        // console.log("filterdData", filterdData);
+        for (let b = 0; b < filterdData.length; b++) {
           // console.log('inv', res.data[r].invoice)
           let totalPrice = 0;
-          for (let r = 0; r < res.data[b].invoice.length; r++) {
+          for (let r = 0; r < filterdData[b].invoice.length; r++) {
             const itemPrice =
-              parseInt(res.data[b].invoice[r].price) *
-              parseInt(res.data[b].invoice[r].qty);
+              parseInt(filterdData[b].invoice[r].price) *
+              parseInt(filterdData[b].invoice[r].qty);
             totalPrice = parseInt(totalPrice) + itemPrice;
           }
           // console.log("totalPrice1", totalPrice);
           Bookings.push({
-            firstNight: res.data[b].firstNight,
-            lastNight: res.data[b].lastNight,
-            numAdult: res.data[b].numAdult,
-            numChild: res.data[b].numChild,
-            guestFirstName: res.data[b].guestFirstName,
-            guestName: res.data[b].guestName,
-            guestEmail: res.data[b].guestEmail,
-            guestMobile: res.data[b].guestMobile,
-            guestPhone: res.data[b].guestPhone,
-            bookId: res.data[b].bookId,
-            roomId: res.data[b].roomId,
+            firstNight: filterdData[b].firstNight,
+            lastNight: filterdData[b].lastNight,
+            numAdult: filterdData[b].numAdult,
+            numChild: filterdData[b].numChild,
+            guestFirstName: filterdData[b].guestFirstName,
+            guestName: filterdData[b].guestName,
+            guestEmail: filterdData[b].guestEmail,
+            guestMobile: filterdData[b].guestMobile,
+            guestPhone: filterdData[b].guestPhone,
+            bookId: filterdData[b].bookId,
+            roomId: filterdData[b].roomId,
             price: totalPrice,
-            propId: res.data[b].propId,
-            referer: res.data[b].referer,
-            lang: res.data[b].lang,
-            guestCountry: res.data[b].guestCountry,
-            guestCountry2: res.data[b].guestCountry2,
-            group: res.data[b].group,
-            masterId: res.data[b].masterId,
+            propId: filterdData[b].propId,
+            referer: filterdData[b].referer,
+            lang: filterdData[b].lang,
+            guestCountry: filterdData[b].guestCountry,
+            guestCountry2: filterdData[b].guestCountry2,
+            group: filterdData[b].group,
+            masterId: filterdData[b].masterId,
           });
         }
       })
