@@ -30,10 +30,43 @@ app.use(express.urlencoded());
 
 const { bed24Func } = require("./bed24Func");
 
+// let sessionData;
+
+// const client = new Client({
+//   qrTimeoutMs: 0,
+//   puppeteer: {
+//     args: ["--no-sandbox"],
+//   },
+// });
+
+// client.on("qr", (qr) => {
+//   qrcode.generate(qr, { small: true });
+// });
+
+// client.on("ready", () => {
+//   console.log("Client is ready!");
+// });
+
+// // Path where the session data will be stored
+// const SESSION_FILE_PATH = "./session.json";
+
+// // Save session values to the file upon successful auth
+// client.on("authenticated", (session) => {
+//   sessionData = session;
+//   fs.writeFile(SESSION_FILE_PATH, JSON.stringify(session), (err) => {
+//     if (err) {
+//       console.error(err);
+//     }
+//   });
+// });
+
+// client.initialize();
+
 const craeteStageFile = async () => {
   const BookingList = await bed24Func.getBooking(false);
+  const STAGES_FILE_PATH = "../stages.json";
   try {
-    fs.unlinkSync("stages.json");
+    fs.unlinkSync(STAGES_FILE_PATH);
     //file removed
     console.log("File deleted!");
   } catch (err) {
@@ -42,6 +75,13 @@ const craeteStageFile = async () => {
   await bed24Func.createStageFile(BookingList);
 };
 const job1 = schedule.scheduleJob("30 07 * * 0-6", craeteStageFile);
+
+// const sendCheckInOut = async () => {
+//   await bed24Func.getArrival();
+//   await bed24Func.getDeparture();
+// };
+
+// const job2 = schedule.scheduleJob("40 13 * * 0-5", sendCheckInOut);
 
 app.post("/api/CreateInvoice", async (req, res) => {
   console.log("data", req.body);

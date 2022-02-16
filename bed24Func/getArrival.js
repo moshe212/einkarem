@@ -74,17 +74,22 @@ const getArrival = async () => {
   const BookingList = await getBooking(true);
   console.log("BookingList", BookingList);
   for (let i = 0; i < BookingList.length; i++) {
+    let Phone = "";
+    let Mobile = "";
     const number =
       BookingList[i].guestMobile.length > 0
         ? phoneUtil.parseAndKeepRawInput(BookingList[i].guestMobile, "IL")
-        : phoneUtil.parseAndKeepRawInput(BookingList[i].guestPhone, "IL");
-    console.log(i, phoneUtil.format(number, PNF.E164));
-    const Phone = phoneUtil.format(number, PNF.E164).replace("+", "") + "@c.us";
-    const Mobile =
-      phoneUtil.format(number, PNF.E164).replace("+", "") + "@c.us";
-
-    const Number = Mobile.length > 5 ? Mobile : Phone;
-
+        : BookingList[i].guestPhone.length > 0
+        ? phoneUtil.parseAndKeepRawInput(BookingList[i].guestPhone, "IL")
+        : 0;
+    if (number != 0) {
+      console.log(i, phoneUtil.format(number, PNF.E164));
+      Phone = phoneUtil.format(number, PNF.E164).replace("+", "") + "@c.us";
+      Mobile = phoneUtil.format(number, PNF.E164).replace("+", "") + "@c.us";
+    } else {
+      console.log("number is not define");
+    }
+    const Number = Mobile.length > 5 ? Mobile : Phone.length > 0 ? Phone : "";
     const isIsraeli =
       BookingList[i].lang === "HE" ||
       BookingList[i].lang === "he" ||
@@ -103,7 +108,7 @@ const getArrival = async () => {
     let Text2 = "";
 
     console.log("Number1", Number);
-    if (isIsraeli && isMaster) {
+    if (isIsraeli && isMaster && Number.length > 0) {
       Text1 =
         BookingList[i].propId === "123250"
           ? "שלום " +
@@ -159,7 +164,7 @@ const getArrival = async () => {
       // await client.sendMessage(Number, Text2);
       await client.sendMessage("972523587990@c.us", Text1);
       await client.sendMessage("972523587990@c.us", Text2);
-    } else if (isMaster) {
+    } else if (isMaster && Number.length > 0) {
       Text1 =
         BookingList[i].propId === "123250"
           ? "Good morning " +
