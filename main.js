@@ -82,7 +82,7 @@ const craeteStageFile = async () => {
   stagesData = await JSON.parse(data);
   console.log("stagesData", stagesData);
 };
-const job1 = schedule.scheduleJob("45 17 * * 0-6", craeteStageFile);
+const job1 = schedule.scheduleJob("57 17 * * 0-6", craeteStageFile);
 
 // const sendCheckInOut = async () => {
 //   await bed24Func.getArrival();
@@ -242,7 +242,7 @@ app.post("/api/GetMessage", async (req, res) => {
         : false;
     console.log("isIsraeli", isIsraeli, isGroup);
     if (isIsraeli && !isGroup) {
-      const Answer = await getAnswer(
+      const Answer = await bed24Func.getAnswer(
         message,
         sender,
         Stage,
