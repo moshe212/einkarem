@@ -74,7 +74,7 @@ const craeteStageFile = async () => {
   }
   await bed24Func.createStageFile(BookingList);
 };
-const job1 = schedule.scheduleJob("10 10 * * 0-6", craeteStageFile);
+const job1 = schedule.scheduleJob("15 10 * * 0-6", craeteStageFile);
 
 // const sendCheckInOut = async () => {
 //   await bed24Func.getArrival();
