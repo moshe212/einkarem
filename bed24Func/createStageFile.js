@@ -48,7 +48,7 @@ const createStageFile = async (BookingList) => {
     }
   }
 
-  fs.writeFile("stages.json", JSON.stringify(stagesData), (err) => {
+  fs.writeFileSync("stages.json", JSON.stringify(stagesData), (err) => {
     console.log(stagesData);
     if (err) {
       console.error(err);
