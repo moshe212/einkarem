@@ -41,33 +41,31 @@ const updateStageFile = async (
     }
 
     const Number = Mobile.length > 5 ? Mobile : Phone.length > 0 ? Phone : "";
-    if (Number.length > 0) {
-      const found = stagesData.bookinglist.some((el) => el.phone === Number);
-      if (!found) {
-        stagesData.bookinglist.push({
-          phone: Number,
-          stage: 0,
-          price: BookingList[b].price,
-          propId: BookingList[b].propId,
-          referer: BookingList[b].referer,
-          lang: BookingList[b].lang,
-          guestCountry: BookingList[b].guestCountry,
-          guestCountry2: BookingList[b].guestCountry2,
-          group: BookingList[b].group,
-          masterId: BookingList[b].masterId,
-          bookId: BookingList[b].bookId,
-          guestFirstName: BookingList[b].guestFirstName,
-          guestLastName: BookingList[b].guestName,
-        }); //add some data
-      } else if (isAnswer) {
-        const index = stagesData.bookinglist.findIndex(
-          (x) => x.phone === PhoneSend
-        );
-        stagesData.bookinglist[index].stage = parseInt(Stage);
-        console.log("Payment", Payment);
-        if (Payment) {
-          stagesData.bookinglist[index].price = parseInt(Payment);
-        }
+    const found = stagesData.bookinglist.some((el) => el.phone === Number);
+    if (!found) {
+      stagesData.bookinglist.push({
+        phone: Number,
+        stage: 0,
+        price: BookingList[b].price,
+        propId: BookingList[b].propId,
+        referer: BookingList[b].referer,
+        lang: BookingList[b].lang,
+        guestCountry: BookingList[b].guestCountry,
+        guestCountry2: BookingList[b].guestCountry2,
+        group: BookingList[b].group,
+        masterId: BookingList[b].masterId,
+        bookId: BookingList[b].bookId,
+        guestFirstName: BookingList[b].guestFirstName,
+        guestLastName: BookingList[b].guestName,
+      }); //add some data
+    } else if (isAnswer) {
+      const index = stagesData.bookinglist.findIndex(
+        (x) => x.phone === PhoneSend
+      );
+      stagesData.bookinglist[index].stage = parseInt(Stage);
+      console.log("Payment", Payment);
+      if (Payment) {
+        stagesData.bookinglist[index].price = parseInt(Payment);
       }
     }
   }
