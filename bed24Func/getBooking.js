@@ -26,7 +26,7 @@ const getBooking = async (Arrival) => {
         },
       })
       .then(function (res) {
-        console.log("res", res.data);
+        // console.log("res", res.data);
         const filterdData = res.data.filter(
           (book) =>
             (book.guestMobile.length > 0 || book.guestPhone.length > 0) &&
