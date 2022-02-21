@@ -82,7 +82,7 @@ const craeteStageFile = async () => {
   stagesData = await JSON.parse(data);
   console.log("stagesData", stagesData);
 };
-const job1 = schedule.scheduleJob("40 07 * * 0-6", craeteStageFile);
+const job1 = schedule.scheduleJob("40 11 * * 0-6", craeteStageFile);
 craeteStageFile();
 // const sendCheckInOut = async () => {
 //   await bed24Func.getArrival();
