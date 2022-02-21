@@ -83,7 +83,7 @@ const craeteStageFile = async () => {
   console.log("stagesData", stagesData);
 };
 const job1 = schedule.scheduleJob("40 07 * * 0-6", craeteStageFile);
-
+craeteStageFile();
 // const sendCheckInOut = async () => {
 //   await bed24Func.getArrival();
 //   await bed24Func.getDeparture();
