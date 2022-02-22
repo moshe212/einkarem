@@ -245,9 +245,14 @@ const getAnswer = async (
             FullName
           );
           console.log("CreditCardLink2", CreditCardLink2);
-          textMessage1 =
-            "תודה רבה. להלן לינק לדף תשלום מאובטח לצורך ביצוע התשלום בכרטיס אשראי.";
-          textMessage2 = CreditCardLink2;
+          if (CreditCardLink2[0] !== 0) {
+            textMessage1 =
+              "תודה רבה. להלן לינק לדף תשלום מאובטח לצורך ביצוע התשלום בכרטיס אשראי.";
+            textMessage2 = CreditCardLink2;
+          } else {
+            textMessage1 = `לצערנו התקבלה שגיאה בתהליך, אנא פנה למזכירות עם פירוט השגיאה. להלן פירוט השגיאה: ${CreditCardLink2[1]}`;
+          }
+
           Answer.push(textMessage1, textMessage2);
           break;
         case 4:

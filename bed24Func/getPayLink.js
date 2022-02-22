@@ -92,9 +92,9 @@ const getPayLink = async (
     console.log("Status:", response.statusCode);
     console.log("Headers:", JSON.stringify(response.headers));
     console.log("Response:", response.data);
-    PayUrl = response.data.data.url;
+    PayUrl = response.statusCode === 1 ? response.data.data.url : "0";
   });
-  return PayUrl;
+  return [PayUrl, response.data.err.message];
 };
 
 module.exports = { getPayLink };
