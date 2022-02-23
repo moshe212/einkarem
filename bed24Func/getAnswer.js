@@ -113,9 +113,13 @@ const getAnswer = async (
             FullName
           );
           console.log("CreditCardLink1", CreditCardLink1);
-          textMessage1 =
-            "תודה רבה. להלן לינק לדף תשלום מאובטח לצורך ביצוע התשלום בכרטיס אשראי.";
-          textMessage2 = CreditCardLink1;
+          if (CreditCardLink1[0] !== 0) {
+            textMessage1 =
+              "תודה רבה. להלן לינק לדף תשלום מאובטח לצורך ביצוע התשלום בכרטיס אשראי.";
+            textMessage2 = CreditCardLink1[0];
+          } else {
+            textMessage1 = `לצערנו התקבלה שגיאה בתהליך, אנא פנה למזכירות עם פירוט השגיאה. להלן פירוט השגיאה: ${CreditCardLink1[1]}`;
+          }
           Answer.push(textMessage1, textMessage2);
           break;
         case 4:
