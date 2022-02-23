@@ -36,18 +36,18 @@ const getAnswer = async (
   const successUrl = "";
   const cancelUrl = "";
   const PAYBOX_Link =
-    Place === "115824"
+    Place === "123250"
       ? "https://payboxapp.page.link/L95Gy2Ti7uUsD7uw6"
-      : Place === "123250"
+      : Place === "115824"
       ? "https://payboxapp.page.link/BWy944VEMYgp6LWG9"
       : "";
   // let CreditCardLink = "";
   console.log("Place", Place);
   const BankDetails =
     Place === "115824"
-      ? "ג'פסי אירוח בע'מ, בנק איגוד (13), סניף 51, חשבון 56620028"
+      ? "ג'פסי אירוח בע'מ, בנק מזרחי (20), סניף 401, חשבון 555105"
       : Place === "123250"
-      ? "מימזיס בע'מ, בנק איגוד (13), סניף 51, חשבון 57050040"
+      ? "מימזיס בע'מ, בנק מזרחי (20), סניף 401, חשבון 555105"
       : "";
   switch (Stage) {
     case 0:
@@ -75,6 +75,7 @@ const getAnswer = async (
           "\nאנחנו אף פעם לא גובים תשלום מראש. כרטיס האשראי שניתן בעת ביצוע ההזמנה ניתן לביטחון בלבד";
         textMessage2 =
           "כיצד תרצו להסדיר את התשלום:" +
+          "\n(בשל רצוננו לחסוך בעמלות אשראי, נודה לכם על תשלום באמצעות אפליקציית PAYBOX)" +
           "\n1️⃣ תשלום במזומן \n2️⃣ תשלום בהעברה בנקאית \n3️⃣ תשלום בכרטיס אשראי \n4️⃣ תשלום באפליקציית PAYBOX";
         Answer.push(textMessage1, textMessage2);
         StageForUpdate = 1;
@@ -248,7 +249,7 @@ const getAnswer = async (
           if (CreditCardLink2[0] !== 0) {
             textMessage1 =
               "תודה רבה. להלן לינק לדף תשלום מאובטח לצורך ביצוע התשלום בכרטיס אשראי.";
-            textMessage2 = CreditCardLink2;
+            textMessage2 = CreditCardLink2[0];
           } else {
             textMessage1 = `לצערנו התקבלה שגיאה בתהליך, אנא פנה למזכירות עם פירוט השגיאה. להלן פירוט השגיאה: ${CreditCardLink2[1]}`;
           }
