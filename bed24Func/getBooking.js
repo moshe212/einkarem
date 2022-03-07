@@ -4,6 +4,11 @@ const moment = require("moment");
 const getBooking = async (Arrival) => {
   const apiKey = process.env.apiKey;
   const propKeys = [process.env.propKey1, process.env.propKey2];
+  const Before4Day = moment()
+    .add(-4, "days")
+    .format("YYYY-MM-DD")
+    .replace("-", "")
+    .replace("-", "");
   const Today = moment()
     // .add(1, "days")
     .format("YYYY-MM-DD")
@@ -21,6 +26,7 @@ const getBooking = async (Arrival) => {
           },
           ...(Arrival ? { arrivalFrom: Today } : { departureFrom: Today }),
           ...(Arrival ? { arrivalTo: Today } : { departureTo: Today }),
+          ...(!Arrival ? { arrivalFrom: Before4Day } : ""),
           includeInvoice: true,
           // status: [1, 2],
         },

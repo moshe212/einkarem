@@ -184,7 +184,7 @@ const getDeparture = async () => {
         ? true
         : false;
     isGroup =
-      BookingList[i].group !== undefined || BookingList[i].masterId !== ""
+      BookingList[i].group !== undefined //|| BookingList[i].masterId !== ""
         ? true
         : false;
 
