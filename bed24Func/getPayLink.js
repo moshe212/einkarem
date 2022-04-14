@@ -97,7 +97,7 @@ const getPayLink = async (
     console.log("PayUrl, Error", PayUrl, Error);
     const answer = [PayUrl, Error];
     console.log("ans", answer);
-    return answer;
+    return PayUrl;
   });
 };
 
