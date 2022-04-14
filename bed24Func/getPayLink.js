@@ -92,8 +92,8 @@ const getPayLink = async (
     console.log("Status:", response.statusCode);
     console.log("Headers:", JSON.stringify(response.headers));
     console.log("Response:", response.data);
-    PayUrl = response.statusCode === 1 ? response.data.data.url : "0";
-    const Error = response.statusCode != 1 ? response.data.err.message : "";
+    PayUrl = response.data.status === 1 ? response.data.data.url : "0";
+    const Error = response.data.status != 1 ? response.data.err.message : "";
 
     return [PayUrl, Error];
   });
