@@ -81,24 +81,25 @@ const getPayLink = async (
   const paymentUrl =
     "https://secure.meshulam.co.il/api/light/server/1.0/createPaymentProcess";
 
-  await axios({
+  const payLinkResponse = await axios({
     method: "post",
     url: paymentUrl,
     data: data,
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
     },
-  }).then(function (response) {
-    console.log("Status:", response.data.status);
-    console.log("Headers:", JSON.stringify(response.headers));
-    console.log("Response:", response.data);
-    PayUrl = response.data.status === 1 ? response.data.data.url : "0";
-    const Error = response.data.status != 1 ? response.data.err.message : "";
-    console.log("PayUrl, Error", PayUrl, Error);
-    const answer = [PayUrl, Error];
-    console.log("ans", answer);
-    return PayUrl;
   });
+  console.log("Status:", payLinkResponse.data.status);
+  console.log("Headers:", JSON.stringify(payLinkResponse.headers));
+  console.log("Response:", payLinkResponse.data);
+  PayUrl =
+    payLinkResponse.data.status === 1 ? payLinkResponse.data.data.url : "0";
+  const Error =
+    payLinkResponse.data.status != 1 ? payLinkResponse.data.err.message : "";
+  console.log("PayUrl, Error", PayUrl, Error);
+  const answer = [PayUrl, Error];
+  console.log("ans", answer);
+  return PayUrl;
 };
 
 module.exports = { getPayLink };
