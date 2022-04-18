@@ -69,10 +69,18 @@ const getPayLink = async (
         Items.length > 0 ? Items[t].itemDesc : ""
       }`;
   }
+  const itemsSumArray = Items.map(
+    (item) => parseInt(item.itemPrice) * parseInt(item.itemQty)
+  );
+  const itemsSum = itemsSumArray.reduce(
+    (previousValue, currentValue) => previousValue + currentValue,
+    0
+  );
   let PayUrl = "";
   console.log("items", Items);
+  console.log("itemsSum", itemsSum);
   const data =
-    `pageCode=${pageCode}&userId=${userId}&apiKey=&sum=${sum}&successUrl=${successUrl}&cancelUrl=${cancelUrl}&description=${description}&paymentNum=&maxPaymentNum=1&pageField[fullName]=${encodeURIComponent(
+    `pageCode=${pageCode}&userId=${userId}&apiKey=&sum=${itemsSum}&successUrl=${successUrl}&cancelUrl=${cancelUrl}&description=${description}&paymentNum=&maxPaymentNum=1&pageField[fullName]=${encodeURIComponent(
       fullName
     )}&pageField[phone]=${phone}` +
     itemsStr +
