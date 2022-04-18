@@ -44,9 +44,9 @@ const getAnswer = async (
   // let CreditCardLink = "";
   console.log("Place", Place);
   const BankDetails =
-    Place === "115824"
+    Place === "123250"
       ? "ג'פסי אירוח בע'מ, בנק מזרחי (20), סניף 401, חשבון 555105"
-      : Place === "123250"
+      : Place === "115824"
       ? "מימזיס בע'מ, בנק מזרחי (20), סניף 401, חשבון 555156"
       : "";
   switch (Stage) {
