@@ -49,7 +49,7 @@ const getPayLink = async (
         const itemDesc = res.data[0].invoice[r].description;
         const PriceMAAM =
           r === 0 ? (isBookingSite ? itemPrice * 1.17 : itemPrice) : itemPrice;
-        console.log("PriceMAAM", PriceMAAM);
+        console.log("PriceMAAM-getPay", PriceMAAM);
         const item = {
           itemPrice: PriceMAAM,
           itemQty: itemQty,
