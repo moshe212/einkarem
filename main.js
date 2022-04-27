@@ -250,7 +250,8 @@ app.post("/api/GetMessage", async (req, res) => {
         BookingList,
         Place,
         BookId,
-        FirstName + " " + LastName
+        FirstName + " " + LastName,
+        isBookingSite
       );
       res.send(Answer);
     }

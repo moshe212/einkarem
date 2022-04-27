@@ -11,7 +11,8 @@ const getPayLink = async (
   phone,
   bookId,
   place,
-  fullName
+  fullName,
+  isBookingSite
 ) => {
   const propKey =
     place === "115824"
@@ -46,8 +47,10 @@ const getPayLink = async (
         const itemPrice = parseInt(res.data[0].invoice[r].price);
         const itemQty = parseInt(res.data[0].invoice[r].qty);
         const itemDesc = res.data[0].invoice[r].description;
+        const PriceMAAM =
+          r === 0 ? (isBookingSite ? itemPrice * 1.17 : itemPrice) : itemPrice;
         const item = {
-          itemPrice: itemPrice,
+          itemPrice: PriceMAAM,
           itemQty: itemQty,
           itemDesc: itemDesc,
         };
