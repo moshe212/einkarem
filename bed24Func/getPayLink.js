@@ -90,8 +90,10 @@ const getPayLink = async (
     itemsStr +
     `&cField1=${bookId}&cField2=${place}`;
   console.log("data", data);
+  // const paymentUrl =
+  //   "https://secure.meshulam.co.il/api/light/server/1.0/createPaymentProcess";
   const paymentUrl =
-    "https://secure.meshulam.co.il/api/light/server/1.0/createPaymentProcess";
+    "https://secure.meshulam.co.il/api/light/server/1.0/createFarPaymentRequest";
 
   const payLinkResponse = await axios({
     method: "post",
