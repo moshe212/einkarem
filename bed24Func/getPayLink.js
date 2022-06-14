@@ -39,23 +39,33 @@ const getPayLink = async (
         departureTo: Today,
         bookId: bookId,
         includeInvoice: true,
-        status: 1,
+        // status: 1,
       },
     })
     .then(function (res) {
-      for (let r = 0; r < res.data[0].invoice.length; r++) {
-        const itemPrice = parseInt(res.data[0].invoice[r].price);
-        const itemQty = parseInt(res.data[0].invoice[r].qty);
-        const itemDesc = res.data[0].invoice[r].description;
-        const PriceMAAM =
-          r === 0 ? (isBookingSite ? itemPrice * 1.17 : itemPrice) : itemPrice;
-        console.log("PriceMAAM-getPay", PriceMAAM);
-        const item = {
-          itemPrice: PriceMAAM,
-          itemQty: itemQty,
-          itemDesc: itemDesc,
-        };
-        Items.push(item);
+      console.log("Status", parseInt(res.data[0].status));
+      if (
+        parseInt(res.data[0].status) === 1 ||
+        parseInt(res.data[0].status) === 2
+      ) {
+        for (let r = 0; r < res.data[0].invoice.length; r++) {
+          const itemPrice = parseInt(res.data[0].invoice[r].price);
+          const itemQty = parseInt(res.data[0].invoice[r].qty);
+          const itemDesc = res.data[0].invoice[r].description;
+          const PriceMAAM =
+            r === 0
+              ? isBookingSite
+                ? itemPrice * 1.17
+                : itemPrice
+              : itemPrice;
+          console.log("PriceMAAM-getPay", PriceMAAM);
+          const item = {
+            itemPrice: PriceMAAM,
+            itemQty: itemQty,
+            itemDesc: itemDesc,
+          };
+          Items.push(item);
+        }
       }
     })
     .catch(function (error) {
