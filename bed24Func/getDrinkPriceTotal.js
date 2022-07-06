@@ -6,6 +6,10 @@ const getDrinkPriceTotal = async (ReciveMsg) => {
     drinkPriceTotal = 25;
   } else if (parseInt(ReciveMsg) == 3) {
     drinkPriceTotal = 12;
+  } else if (parseInt(ReciveMsg) == 4) {
+    drinkPriceTotal = 25;
+  } else if (parseInt(ReciveMsg) == 5) {
+    drinkPriceTotal = 20;
   } else {
     const arrRec = ReciveMsg.split(",");
     console.log("arrRec", arrRec);
@@ -25,6 +29,12 @@ const getDrinkPriceTotal = async (ReciveMsg) => {
           break;
         case 3:
           pricePerOne = 12;
+          break;
+        case 4:
+          pricePerOne = 25;
+          break;
+        case 5:
+          pricePerOne = 20;
           break;
       }
       drinkPrice = pricePerOne * drinkCount;

@@ -55,7 +55,7 @@ const getAnswer = async (
       if (ReciveMsg == 1) {
         textMessage1 =
           "תודה. נא סמנו את המוצרים בהם השתמשתם:" +
-          "\n1️⃣ בקבוק יין \n2️⃣ בירה/בריזר \n3️⃣ שתיה קלה/סודה";
+          "\n1️⃣ בקבוק יין \n2️⃣ בירה/בריזר \n3️⃣ שתיה קלה/סודה \n4️⃣ סיידר אלכוהולי \n5️⃣ מיץ טבעי מססה";
         textMessage2 =
           "*שים לב* במידה והשתמשת ביותר מסוג שתיה אחד אנא השב בפורמט הבא לפי מזהה המשקה, לדוגמא עבור שלושה בקבוקי יין ושני בירה:" +
           "\nמשקה 1 כמות 3,משקה 2 כמות 2";
@@ -148,14 +148,15 @@ const getAnswer = async (
       break;
     case 2:
       const DrinkPriceTotal = await getDrinkPriceTotal(ReciveMsg);
-      Payment = parseFloat(Price) + parseFloat(DrinkPriceTotal);
+      Payment =
+        parseFloat(Price).toFixed(2) + parseFloat(DrinkPriceTotal).toFixed(2);
       console.log("regex", ReciveMsg);
-      const Regex1 = /^משקה [1-3] כמות [0-9]$/;
-      const Regex2 = /^משקה [1-3] כמות [0-9],משקה [1-3] כמות [0-9]$/;
+      const Regex1 = /^משקה [1-5] כמות [0-9]$/;
+      const Regex2 = /^משקה [1-5] כמות [0-9],משקה [1-5] כמות [0-9]$/;
       if (
         Regex1.test(ReciveMsg) ||
         Regex2.test(ReciveMsg) ||
-        [1, 2, 3].includes(parseInt(ReciveMsg))
+        [1, 2, 3, 4, 5].includes(parseInt(ReciveMsg))
       ) {
         textMessage1 =
           "תודה רבה. הסכום לתשלום כולל מעמ הוא: " +
