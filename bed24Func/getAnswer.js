@@ -148,8 +148,7 @@ const getAnswer = async (
       break;
     case 2:
       const DrinkPriceTotal = await getDrinkPriceTotal(ReciveMsg);
-      Payment =
-        parseFloat(Price).toFixed(2) + parseFloat(DrinkPriceTotal).toFixed(2);
+      Payment = parseInt(Price) + parseInt(DrinkPriceTotal);
       console.log("regex", ReciveMsg);
       const Regex1 = /^משקה [1-5] כמות [0-9]$/;
       const Regex2 = /^משקה [1-5] כמות [0-9],משקה [1-5] כמות [0-9]$/;
