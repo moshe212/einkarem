@@ -212,7 +212,7 @@ app.post("/api/GetMessage", async (req, res) => {
   console.log("sender", sender);
   console.log("stagesData", stagesData.bookinglist);
   const index = await stagesData.bookinglist.findIndex(
-    (x) => x.phone === sender
+    (x) => x.phone === sender.trim()
   );
   console.log("idx", index);
   if (index >= 0) {
