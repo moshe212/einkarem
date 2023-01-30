@@ -38,9 +38,9 @@ const getAnswer = async (
   const cancelUrl = "";
   const PAYBOX_Link =
     Place === "123250"
-      ? "https://payboxapp.page.link/L95Gy2Ti7uUsD7uw6"
-      : Place === "115824"
       ? "https://payboxapp.page.link/BWy944VEMYgp6LWG9"
+      : Place === "115824"
+      ? "https://payboxapp.page.link/L95Gy2Ti7uUsD7uw6"
       : "";
   // let CreditCardLink = "";
   console.log("Place", Place);
